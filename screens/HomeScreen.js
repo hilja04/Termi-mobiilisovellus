@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Alert, FlatList, Modal, Text, TextInput, View, } from 'react-native';
 import { useSQLiteContext } from 'expo-sqlite';
-import { Button } from 'react-native-paper';
+import { Button, Card } from 'react-native-paper';
 import { deleteDeck, fetchDecks, saveDeck, } from '../database/dbFunctions';
+import styles from './styles';
 
 export default function HomeScreen() {
   const db = useSQLiteContext(); //accessing the database
@@ -28,7 +29,7 @@ export default function HomeScreen() {
     setDescription('');
     setShowModal(false);
   }
-  
+
   const handleDeleteDeck = async (id) => {
     Alert.alert(
       "Please confirm",
@@ -57,31 +58,37 @@ export default function HomeScreen() {
       </Button>
 
       <Modal
+        animationType='fade'
+        transparent={true}
         visible={showModal}
         onRequestClose={() => setShowModal(false)}
+        
       >
-        <View>
-          <Text>Create a new deck</Text>
-          <TextInput
-            placeholder="Title"
-            value={title}
-            onChangeText={setTitle}
+        <View style={styles.modalBackground}>
+          <View style={styles.addDeckModal}>
+            <Text>Create a new deck</Text>
+            <TextInput
+             style={styles.input}
+              placeholder="Title"
+              value={title}
+              onChangeText={setTitle}
 
-          />
-          <TextInput
-            placeholder="Description"
-            value={description}
-            onChangeText={setDescription}
+            />
+            <TextInput
+             style={styles.input}
+              placeholder="Description"
+              value={description}
+              onChangeText={setDescription}
 
-          />
-          <View>
-            <Button mode="contained" onPress={handleSaveDeck}>
-              Save Deck
-            </Button>
-
-            <Button mode="contained" onPress={() => setShowModal(false)}>
-              Cancel
-            </Button>
+            />
+            <View style={styles.buttonRow}>
+              <Button mode="contained"style={styles.saveButton} onPress={handleSaveDeck}>
+                Save Deck
+              </Button>
+                  <Button mode="contained" style={styles.cancelButton} onPress={() => setShowModal(false)}>
+                Cancel
+              </Button>
+            </View>
           </View>
         </View>
 
@@ -91,19 +98,21 @@ export default function HomeScreen() {
         data={decks}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
-          <View style={{ padding: 10, borderBottomWidth: 1 }}>
+          <View style={styles.deck}>
             <Text style={{ fontSize: 18, fontWeight: 'bold' }}>{item.title}</Text>
             <Text>{item.description}</Text>
             <Button
+              style={styles.deleteButton}
               mode="contained"
               onPress={() => handleDeleteDeck(item.id)}
-              style={{ marginTop: 5, backgroundColor: 'red' }}
             >
               Delete
             </Button>
           </View>
+
         )}
       />
+
     </View>
 
   );
