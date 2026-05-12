@@ -2,6 +2,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/HomeScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import HomeStackNavigator from './StackNavigator';
 
 //Tab navigator (Home & Settings)
 const Tab = createBottomTabNavigator();
@@ -23,10 +24,22 @@ export default function TabNavigator() {
                 },
                 tabBarActiveTintColor: 'tomato',
                 tabBarInactiveTintColor: 'gray',
+                tabBarStyle: {
+                    backgroundColor: '#505050',
+
+                },
+                headerStyle: { backgroundColor: '#505050' },
+                headerTintColor: '#fff',
             })}
         >
-            <Tab.Screen name="Home" component={HomeScreen} />
-            <Tab.Screen name="Settings" component={SettingsScreen} />
+            <Tab.Screen
+                name="Home"
+                component={HomeStackNavigator}
+                options={{ headerShown: false }}
+            />
+            <Tab.Screen
+                name="Settings"
+                component={SettingsScreen} />
         </Tab.Navigator>
 
     );

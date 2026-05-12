@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Alert, FlatList, Modal, Text, TextInput, View, } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { Alert, FlatList, Modal, Text, TextInput, TouchableOpacity, View, } from 'react-native';
 import { useSQLiteContext } from 'expo-sqlite';
 import { Button, Card } from 'react-native-paper';
 import { deleteDeck, fetchDecks, saveDeck, } from '../database/dbFunctions';
@@ -7,6 +8,7 @@ import styles from './styles';
 
 export default function HomeScreen() {
   const db = useSQLiteContext(); //accessing the database
+  const navigation = useNavigation();
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -52,68 +54,72 @@ export default function HomeScreen() {
   }
 
   return (
-    <View >
-      <Button mode='contained' onPress={() => setShowModal(true)}>
-        Add Deck
-      </Button>
-
+    <View style={styles.container}>
       <Modal
         animationType='fade'
         transparent={true}
         visible={showModal}
         onRequestClose={() => setShowModal(false)}
-        
       >
+    
         <View style={styles.modalBackground}>
           <View style={styles.addDeckModal}>
             <Text>Create a new deck</Text>
             <TextInput
-             style={styles.input}
+              style={styles.input}
               placeholder="Title"
               value={title}
               onChangeText={setTitle}
-
             />
             <TextInput
-             style={styles.input}
+              style={styles.input}
               placeholder="Description"
               value={description}
               onChangeText={setDescription}
-
             />
             <View style={styles.buttonRow}>
-              <Button mode="contained"style={styles.saveButton} onPress={handleSaveDeck}>
+              <Button mode="contained" style={styles.saveButton} onPress={handleSaveDeck}>
                 Save Deck
               </Button>
-                  <Button mode="contained" style={styles.cancelButton} onPress={() => setShowModal(false)}>
+              <Button mode="contained" style={styles.cancelButton} onPress={() => setShowModal(false)}>
                 Cancel
               </Button>
             </View>
           </View>
         </View>
-
       </Modal>
+
       {/* List of decks with temporary styling */}
       <FlatList
         data={decks}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
-          <View style={styles.deck}>
-            <Text style={{ fontSize: 18, fontWeight: 'bold' }}>{item.title}</Text>
-            <Text>{item.description}</Text>
-            <Button
-              style={styles.deleteButton}
-              mode="contained"
-              onPress={() => handleDeleteDeck(item.id)}
-            >
-              Delete
-            </Button>
+          <View>
+            <TouchableOpacity onPress={() => navigation.navigate("DeckDetails", { deck: item })}>
+              <View style={styles.deck}>
+                <Text style={{ fontSize: 18, fontWeight: 'bold' }}>{item.title}</Text>
+                <Text>{item.description}</Text>
+                <Button
+                  style={styles.deleteButton}
+                  mode="contained"
+                  onPress={() => handleDeleteDeck(item.id)}
+                >
+                  Delete
+                </Button>
+              </View>
+            </TouchableOpacity>
           </View>
-
         )}
       />
-
+      
+      <Button
+        mode='outlined'
+        onPress={() => setShowModal(true)}
+        style={styles.addButton}
+        labelStyle={styles.buttonLabel}
+      >
+        Add
+      </Button>
     </View>
-
   );
 }

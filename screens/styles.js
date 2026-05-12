@@ -1,9 +1,15 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
+
+    container: {
+        backgroundColor: '#d6d3d8',
+        flex: 1,
+        position: 'relative',
+    },
     input: {
         height: 50,
-        borderColor: '#B27ACF',
+        borderColor: '#c56ff0',
         borderWidth: 2,
         marginTop: 20,
         width: '70%',
@@ -13,7 +19,7 @@ export default StyleSheet.create({
         color: '#333',
     },
     deck: {
-        backgroundColor: '#ffffff',
+        backgroundColor: '#ac5fdb',
         padding: 15,
         marginVertical: 12,
         marginHorizontal: 12,
@@ -34,13 +40,53 @@ export default StyleSheet.create({
     deckDescription: {
 
     },
+    addDeckModal: {
+        width: '90%',
+        height: 350,
+        backgroundColor: '#c79bd0',
+        borderColor: '#57355e',
+        borderWidth: 3,
+        borderRadius: 15,
+        alignItems: 'center',
+        justifyContent: 'center',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 8 },
+        shadowOpacity: 0.3,
+        shadowRadius: 4,
+        elevation: 8,
+
+    },
+    modalBackground: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.6)',
+    },
+    buttonLabel: {
+        fontSize: 15,
+        color:'black',
+    },
+    addButton: {
+        position: 'absolute',
+        bottom: 20,
+        right: 20,
+        width: 90,
+        height: 40,
+        backgroundColor: '#fef7fc',
+        borderRadius: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        elevation: 5,
+        borderColor: 'black',
+    },
+
     deleteButton: {
         width: "30%",
-        height:45,
-        backgroundColor:"red",
-        alignSelf:"flex-end"
+        height: 45,
+        backgroundColor: "red",
+        alignSelf: "flex-end"
     },
-     saveButton: {
+    saveButton: {
         backgroundColor: "#C55FFC",
         margin: 3,
         borderRadius: 10,
@@ -49,38 +95,16 @@ export default StyleSheet.create({
     },
     cancelButton: {
         backgroundColor: '#808080',
-        margin:3,
+        margin: 3,
         borderWidth: 1,
         borderRadius: 10,
         borderWidth: 1,
         borderColor: "black",
     },
-    addDeckModal:{
-        width: '90%',
-        height: 350,
-        backgroundColor: '#c79bd0',
-        borderColor: '#57355e',
-        borderWidth: 3,
-        borderRadius: 15,
-        alignItems: 'center',
-        justifyContent:'center',
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 8},
-        shadowOpacity: 0.3,
-        shadowRadius: 4,
-        elevation: 8,
-        
-    },
-    modalBackground: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'rgba(0, 0, 0, 0.6)',
-    },
     buttonRow: {
-        flexDirection: "row",  
+        flexDirection: "row",
         justifyContent: 'center',
-        width: "100%",              
+        width: "100%",
         marginTop: 20,
     },
 })
