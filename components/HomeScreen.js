@@ -5,7 +5,7 @@ import { useSQLiteContext } from 'expo-sqlite';
 import { Button, Card } from 'react-native-paper';
 import { deleteDeck, fetchDecks, saveDeck, } from '../database/dbFunctions';
 import styles from './styles';
-
+import AddDeck from './AddDeck';
 export default function HomeScreen() {
   const db = useSQLiteContext(); //accessing the database
   const navigation = useNavigation();
@@ -55,40 +55,6 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
-      <Modal
-        animationType='fade'
-        transparent={true}
-        visible={showModal}
-        onRequestClose={() => setShowModal(false)}
-      >
-    
-        <View style={styles.modalBackground}>
-          <View style={styles.addDeckModal}>
-            <Text>Create a new deck</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Title"
-              value={title}
-              onChangeText={setTitle}
-            />
-            <TextInput
-              style={styles.input}
-              placeholder="Description"
-              value={description}
-              onChangeText={setDescription}
-            />
-            <View style={styles.buttonRow}>
-              <Button mode="contained" style={styles.saveButton} onPress={handleSaveDeck}>
-                Save Deck
-              </Button>
-              <Button mode="contained" style={styles.cancelButton} onPress={() => setShowModal(false)}>
-                Cancel
-              </Button>
-            </View>
-          </View>
-        </View>
-      </Modal>
-
       {/* List of decks with temporary styling */}
       <FlatList
         data={decks}
@@ -111,15 +77,8 @@ export default function HomeScreen() {
           </View>
         )}
       />
-      
-      <Button
-        mode='outlined'
-        onPress={() => setShowModal(true)}
-        style={styles.addButton}
-        labelStyle={styles.buttonLabel}
-      >
-        Add
-      </Button>
+      <AddDeck onDeckAdded={loadDecks} />
+  
     </View>
   );
 }
