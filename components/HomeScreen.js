@@ -15,8 +15,8 @@ export default function HomeScreen() {
   const [decks, setDecks] = useState([]);
 
   const loadDecks = async () => {
-    const fetched = await fetchDecks(db)
-    setDecks(fetched)
+    const fetched = await fetchDecks(db);
+    setDecks(fetched);
   }
 
   useEffect(() => {
