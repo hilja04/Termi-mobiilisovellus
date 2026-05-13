@@ -13,7 +13,7 @@ export default StyleSheet.create({
         borderWidth: 2,
         marginTop: 20,
         width: '70%',
-        borderRadius: 10,
+        borderRadius: 5,
         paddingHorizontal: 10,
         backgroundColor: '#FFF',
         color: '#333',
@@ -40,7 +40,8 @@ export default StyleSheet.create({
     deckDescription: {
 
     },
-    addDeckModal: {
+    
+    deckModal: {
         width: '90%',
         height: 350,
         backgroundColor: '#c79bd0',
@@ -56,6 +57,10 @@ export default StyleSheet.create({
         elevation: 8,
 
     },
+    modalHeader:{
+        fontSize:20,
+    },
+
     modalBackground: {
         flex: 1,
         justifyContent: 'center',

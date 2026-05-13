@@ -9,9 +9,11 @@ export default function App() {
       databaseName="termi.db"
       onInit={initializeDatabase}
     >
+
       <NavigationContainer>
         <TabNavigator />
       </NavigationContainer>
+
     </SQLiteProvider>
   );
 }

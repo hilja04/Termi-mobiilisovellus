@@ -1,18 +1,17 @@
 import { useEffect, useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
 import { Alert, FlatList, Modal, Text, TextInput, TouchableOpacity, View, } from 'react-native';
-import { useSQLiteContext } from 'expo-sqlite';
 import { Button, Card } from 'react-native-paper';
-import { deleteDeck, fetchDecks, saveDeck, } from '../database/dbFunctions';
-import styles from './styles';
+import { useNavigation } from '@react-navigation/native';
+import { useSQLiteContext } from 'expo-sqlite';
 import AddDeck from './AddDeck';
+import EditDeck from './EditDeck';
+import { deleteDeck, fetchDecks, saveDeck, } from '../database/dbFunctions';
+import styles from './styles'
+
 export default function HomeScreen() {
   const db = useSQLiteContext(); //accessing the database
   const navigation = useNavigation();
 
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [showModal, setShowModal] = useState(false);
   const [decks, setDecks] = useState([]);
 
   const loadDecks = async () => {
@@ -23,14 +22,6 @@ export default function HomeScreen() {
   useEffect(() => {
     loadDecks();
   }, []);
-
-  const handleSaveDeck = async () => {
-    await saveDeck(db, title, description);
-    await loadDecks();
-    setTitle('');
-    setDescription('');
-    setShowModal(false);
-  }
 
   const handleDeleteDeck = async (id) => {
     Alert.alert(
@@ -55,7 +46,7 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
-      {/* List of decks with temporary styling */}
+      {/* List of decks */}
       <FlatList
         data={decks}
         keyExtractor={(item) => item.id.toString()}
@@ -72,11 +63,13 @@ export default function HomeScreen() {
                 >
                   Delete
                 </Button>
+                <EditDeck onDeckUpdated ={loadDecks} selectedDeck = {item}/>
               </View>
             </TouchableOpacity>
           </View>
         )}
       />
+      {/* Component to add decks */}
       <AddDeck onDeckAdded={loadDecks} />
   
     </View>

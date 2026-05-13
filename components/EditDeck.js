@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSQLiteContext } from "expo-sqlite";
 import { Modal, View, Text, } from "react-native";
 import { Button, TextInput } from "react-native-paper";
-import { useSQLiteContext } from "expo-sqlite";
-import { saveDeck } from "../database/dbFunctions";
+import { updateDeck } from "../database/dbFunctions";
 import styles from "./styles";
 
-export default function AddDeck({ onDeckAdded }) {
+export default function EditDeck({ onDeckUpdated, selectedDeck }) {
     //get database
     const db = useSQLiteContext();
 
@@ -13,23 +13,30 @@ export default function AddDeck({ onDeckAdded }) {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
 
-    const handleSaveDeck = async () => {
-        await saveDeck(db, title, description);
-        await onDeckAdded(); // Updates the list of decks in HomeScreen
+    const openModal = () => {
+        // filling edit inputs with existing values
+        setTitle(selectedDeck.title);
+        setDescription(selectedDeck.description);
+        setShowModal(true);
+    };
+
+    const handleUpdateDeck = async () => {
+        await updateDeck(db, selectedDeck.id, title, description)
+        await onDeckUpdated(); // Updates the list of decks in HomeScreen
         setTitle("");
         setDescription("");
         setShowModal(false);
-    };
+    }
 
     return (
         <>
             <Button
                 mode="outlined"
-                onPress={() => setShowModal(true)}
+                onPress={openModal}
                 style={styles.addButton}
                 labelStyle={styles.buttonLabel}
             >
-                Add
+                Edit
             </Button>
 
             <Modal
@@ -40,29 +47,29 @@ export default function AddDeck({ onDeckAdded }) {
             >
                 <View style={styles.modalBackground}>
                     <View style={styles.deckModal}>
-                        <Text style={styles.modalHeader}>Create a new deck</Text>
-
+                        <Text style={styles.modalHeader}>Edit your deck</Text>
                         <TextInput
                             style={styles.input}
-                            placeholder="Title"
+                            placeholder="Write new title..."
                             value={title}
                             onChangeText={setTitle}
                         />
 
                         <TextInput
                             style={styles.input}
-                            placeholder="Description"
+                            placeholder="Write new description..."
                             value={description}
                             onChangeText={setDescription}
                         />
+
 
                         <View style={styles.buttonRow}>
                             <Button
                                 mode="contained"
                                 style={styles.saveButton}
-                                onPress={handleSaveDeck}
+                                onPress={handleUpdateDeck}
                             >
-                                Save Deck
+                                Update Deck
                             </Button>
 
                             <Button

@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeScreen from '../screens/HomeScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import HomeScreen from '../components/HomeScreen';
+import SettingsScreen from '../components/SettingsScreen';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import HomeStackNavigator from './StackNavigator';
 
