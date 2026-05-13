@@ -1,6 +1,6 @@
 import { useSQLiteContext } from 'expo-sqlite';
 import { useEffect, useState } from 'react';
-import { FlatList, View, Text, } from 'react-native'
+import { FlatList, View, Text, TouchableOpacity } from 'react-native'
 import { fetchCards } from '../database/dbFunctions';
 import styles from './styles';
 import AddCard from './AddCard';
@@ -19,21 +19,34 @@ export default function DeckScreen({ route }) {
     loadCards();
   }, [])
 
+  //function to turn cards
+  const toggleCards = (index) => {
+    const updatedCards = [...cards]; // makes a copy of cards
+    updatedCards[index].showAnswer = !updatedCards[index].showAnswer; // toggles showAnswer between true and false to turn the cards
+    setCards(updatedCards);
+  };
+
   return (
     <View style={styles.container}>
+
+      <Text style={styles.deckDescription}> {deck.description}</Text>
+
+      {cards.length === 0 && (
+        <Text style={styles.notifyText}>{"No cards yet — add one!"}</Text>
+      )}
       {/* List of decks */}
+
       <FlatList
         data={cards}
         keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <View>
+        renderItem={({ item, index }) => (
 
-            <View style={styles.deck}>
-              <Text style={{ fontSize: 18, fontWeight: 'bold' }}>{item.answer}</Text>
-              <Text>{item.question}</Text>
-            </View>
 
-          </View>
+          <TouchableOpacity onPress={() => toggleCards(index)} style={styles.deck}>
+            <Text style={styles.cardTitle}>
+              {item.showAnswer ? item.answer : item.question}
+            </Text>
+          </TouchableOpacity>
         )}
       />
       {/* Component to add decks */}

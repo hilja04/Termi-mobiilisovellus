@@ -46,6 +46,11 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
+      
+      {decks.length === 0 && (
+          <Text style={styles.notifyText}>{"No decks yet — start by adding one!"}</Text>
+        )}
+      
       {/* List of decks */}
       <FlatList
         data={decks}
@@ -54,8 +59,7 @@ export default function HomeScreen() {
           <View>
             <TouchableOpacity onPress={() => navigation.navigate("DeckDetails", { deck: item })}>
               <View style={styles.deck}>
-                <Text style={{ fontSize: 18, fontWeight: 'bold' }}>{item.title}</Text>
-                <Text>{item.description}</Text>
+                <Text style={styles.cardTitle}>{item.title}</Text>
                 <Button
                   style={styles.deleteButton}
                   mode="contained"
@@ -63,15 +67,16 @@ export default function HomeScreen() {
                 >
                   Delete
                 </Button>
-                <EditDeck onDeckUpdated ={loadDecks} selectedDeck = {item}/>
+                <EditDeck onDeckUpdated={loadDecks} selectedDeck={item} />
               </View>
             </TouchableOpacity>
           </View>
         )}
       />
+        
       {/* Component to add decks */}
       <AddDeck onDeckAdded={loadDecks} />
-  
+
     </View>
   );
 }

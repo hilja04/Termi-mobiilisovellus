@@ -30,15 +30,31 @@ export default StyleSheet.create({
         shadowRadius: 6,
         elevation: 6,
         height: 150,
-        width: "90%",
-        alignSelf: "center"
+        width: "80%",
+        alignSelf: "center",
+        justifyContent: "center",
+        alignItems: "center",
 
     },
-    deckTitle: {
-
+    cardTitle:{
+        textAlign: "center",
+        fontSize: 20,
+        
+    },
+    
+    notifyText: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        textAlign: "center",
+        fontSize: 15,
+        paddingTop:30,
+        
     },
     deckDescription: {
-
+        fontSize:15,
+        padding:13, 
+        alignSelf:'center',
     },
     
     deckModal: {
