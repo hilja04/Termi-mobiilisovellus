@@ -7,6 +7,13 @@ export default StyleSheet.create({
         flex: 1,
         position: 'relative',
     },
+    flashcardContainer: {
+        flex: 1,
+        backgroundColor: '#d6d3d8',
+        alignItems:'center',
+        justifyContent:'center',
+       
+    },
     input: {
         height: 50,
         borderColor: '#c56ff0',
@@ -37,6 +44,7 @@ export default StyleSheet.create({
 
     },
     cardTitle:{
+        position:"absolute",
         textAlign: "center",
         fontSize: 20,
         
@@ -44,7 +52,6 @@ export default StyleSheet.create({
     
     notifyText: {
         flex: 1,
-        justifyContent: "center",
         alignItems: "center",
         textAlign: "center",
         fontSize: 15,
@@ -75,6 +82,7 @@ export default StyleSheet.create({
     },
     modalHeader:{
         fontSize:20,
+        margin:10,
     },
 
     modalBackground: {
@@ -95,17 +103,28 @@ export default StyleSheet.create({
         height: 40,
         backgroundColor: '#fef7fc',
         borderRadius: 10,
-        justifyContent: 'center',
-        alignItems: 'center',
+        elevation: 5,
+        borderColor: 'black',
+    },
+    defaultButton:{ 
+        width: 90,
+        height: 40,
+        backgroundColor: '#fef7fc',
+        borderRadius: 10,
         elevation: 5,
         borderColor: 'black',
     },
 
     deleteButton: {
+        position: 'absolute', 
         width: "30%",
         height: 45,
         backgroundColor: "red",
-        alignSelf: "flex-end"
+        alignSelf: "flex-end",
+        bottom:20,
+        right:20
+        
+        
     },
     saveButton: {
         backgroundColor: "#C55FFC",
@@ -119,7 +138,6 @@ export default StyleSheet.create({
         margin: 3,
         borderWidth: 1,
         borderRadius: 10,
-        borderWidth: 1,
         borderColor: "black",
     },
     buttonRow: {

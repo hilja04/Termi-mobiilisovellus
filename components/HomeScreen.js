@@ -57,7 +57,7 @@ export default function HomeScreen() {
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <View>
-            <TouchableOpacity onPress={() => navigation.navigate("DeckDetails", { deck: item })}>
+            <TouchableOpacity onPress={() => navigation.navigate("DeckScreen", { deck: item })}>
               <View style={styles.deck}>
                 <Text style={styles.cardTitle}>{item.title}</Text>
                 <Button

@@ -33,7 +33,7 @@ export default function EditDeck({ onDeckUpdated, selectedDeck }) {
             <Button
                 mode="outlined"
                 onPress={openModal}
-                style={styles.addButton}
+                style={[styles.defaultButton, { top:20, right:20,position:"absolute"}]}
                 labelStyle={styles.buttonLabel}
             >
                 Edit
