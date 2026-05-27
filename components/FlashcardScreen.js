@@ -52,6 +52,7 @@ export default function FlashCardScreen({ route }) {
         }));
         nextCard();
     }
+
     const resetGame = () => {
         setGameFinished(false);
         setCurrentIndex(0);
@@ -62,8 +63,8 @@ export default function FlashCardScreen({ route }) {
     return (
         <View style={styles.flashcardContainer}>
 
-
             <Text style={styles.modalHeader}>{deck.title}</Text>
+            
             {!gameFinished ? (
                 <>
                     <Text style={{ fontSize: 15 }}>
@@ -77,6 +78,7 @@ export default function FlashCardScreen({ route }) {
                             }
                         </Text>
                     </TouchableOpacity>
+
                     <View style={styles.buttonRow}>
                         <Button mode="contained" onPress={markIncorrect} style={{ marginRight: 10 }}>
                             Wrong ❌
@@ -87,6 +89,7 @@ export default function FlashCardScreen({ route }) {
                         </Button>
                     </View>
                 </>
+
             ) : (
                 <View style={{ alignItems: 'center' }}>
                     <Text>Game over!</Text>
@@ -95,7 +98,7 @@ export default function FlashCardScreen({ route }) {
                     <Button onPress={resetGame} mode="outlined" style={{ margin: 10 }}>Try again!</Button>
                 </View>
             )}
+
         </View>
     );
-
 }

@@ -6,6 +6,7 @@ import { useSQLiteContext } from 'expo-sqlite';
 import AddDeck from './AddDeck';
 import EditDeck from './EditDeck';
 import { deleteDeck, fetchDecks, saveDeck, } from '../database/dbFunctions';
+import OptionsButton from './OptionsButton';
 import styles from './styles'
 
 export default function HomeScreen() {
@@ -13,6 +14,7 @@ export default function HomeScreen() {
   const navigation = useNavigation();
 
   const [decks, setDecks] = useState([]);
+  const [selectedDeck, setSelectedDeck] = useState(null);
 
   const loadDecks = async () => {
     const fetched = await fetchDecks(db);
@@ -46,36 +48,47 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
-      
+
       {decks.length === 0 && (
-          <Text style={styles.notifyText}>{"No decks yet — start by adding one!"}</Text>
-        )}
-      
+        <Text style={styles.notifyText}>{"No decks yet — start by adding one!"}</Text>
+      )}
+
       {/* List of decks */}
       <FlatList
         data={decks}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
-          <View>
+          <View >
             <TouchableOpacity onPress={() => navigation.navigate("DeckScreen", { deck: item })}>
               <View style={styles.deck}>
                 <Text style={styles.cardTitle}>{item.title}</Text>
-                <Button
-                  style={styles.deleteButton}
-                  mode="contained"
-                  onPress={() => handleDeleteDeck(item.id)}
-                >
-                  Delete
-                </Button>
-                <EditDeck onDeckUpdated={loadDecks} selectedDeck={item} />
+                <View style={{ position: 'absolute', right: 5, top: 5 }}>
+                  <OptionsButton
+                    onEdit={() => {
+                      setSelectedDeck(item);
+                    }}
+                    onDelete={() => handleDeleteDeck(item.id)}
+                  />
+                </View>
               </View>
+
             </TouchableOpacity>
+
           </View>
         )}
       />
-        
       {/* Component to add decks */}
       <AddDeck onDeckAdded={loadDecks} />
+
+      {selectedDeck && (
+        <EditDeck
+          selectedDeck={selectedDeck}
+          onDeckUpdated={() => {
+            loadDecks();
+            setSelectedDeck(null);
+          }}
+        />
+      )}
 
     </View>
   );
