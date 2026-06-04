@@ -3,6 +3,7 @@ import HomeScreen from "../components/HomeScreen";
 import DeckScreen from "../components/DeckScreen";
 import { StackScreen } from "react-native-screens";
 import FlashCardScreen from "../components/FlashcardScreen";
+import MultipleScreen from "../components/MultipleScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -27,6 +28,11 @@ export default function HomeStackNavigator() {
                 name="FlashCards"
                 component={FlashCardScreen}
                 options={{title:"FlashCards"}}
+            />
+            <Stack.Screen
+                name="MultipleChoice"
+                component={MultipleScreen}
+                options={{title:"Multiple-Choice"}}
             />
         </Stack.Navigator>
     );

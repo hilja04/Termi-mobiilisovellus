@@ -10,9 +10,9 @@ export default StyleSheet.create({
     flashcardContainer: {
         flex: 1,
         backgroundColor: '#d6d3d8',
-        alignItems:'center',
-        justifyContent:'center',
-       
+        alignItems: 'center',
+        justifyContent: 'center',
+
     },
     input: {
         height: 50,
@@ -43,27 +43,27 @@ export default StyleSheet.create({
         alignItems: "center",
 
     },
-    cardTitle:{
-        position:"absolute",
+    cardTitle: {
+        position: "absolute",
         textAlign: "center",
         fontSize: 20,
-        
+
     },
-    
+
     notifyText: {
         flex: 1,
         alignItems: "center",
         textAlign: "center",
         fontSize: 15,
-        paddingTop:30,
-        
+        paddingTop: 30,
+
     },
     deckDescription: {
-        fontSize:15,
-        padding:13, 
-        alignSelf:'center',
+        fontSize: 15,
+        padding: 13,
+        alignSelf: 'center',
     },
-    
+
     deckModal: {
         width: '90%',
         height: 350,
@@ -80,9 +80,9 @@ export default StyleSheet.create({
         elevation: 8,
 
     },
-    modalHeader:{
-        fontSize:20,
-        margin:10,
+    modalHeader: {
+        fontSize: 20,
+        margin: 10,
     },
 
     modalBackground: {
@@ -93,7 +93,7 @@ export default StyleSheet.create({
     },
     buttonLabel: {
         fontSize: 15,
-        color:'black',
+        color: 'black',
     },
     addButton: {
         position: 'absolute',
@@ -106,7 +106,7 @@ export default StyleSheet.create({
         elevation: 5,
         borderColor: 'black',
     },
-    defaultButton:{ 
+    defaultButton: {
         width: 90,
         height: 40,
         backgroundColor: '#fef7fc',
@@ -116,15 +116,15 @@ export default StyleSheet.create({
     },
 
     deleteButton: {
-        position: 'absolute', 
+        position: 'absolute',
         width: "30%",
         height: 45,
         backgroundColor: "red",
         alignSelf: "flex-end",
-        bottom:20,
-        right:20
-        
-        
+        bottom: 20,
+        right: 20
+
+
     },
     saveButton: {
         backgroundColor: "#C55FFC",
@@ -145,5 +145,20 @@ export default StyleSheet.create({
         justifyContent: 'center',
         width: "100%",
         marginTop: 20,
+    },
+    choiceButton: {
+        padding: 12,
+        borderRadius: 10,
+        marginVertical: 6,
+        width: 250,
+        backgroundColor: "#333",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+
+    choiceText: {
+        color: "white",
+        fontSize: 16,
+        textAlign: "center",
     },
 })

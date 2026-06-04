@@ -6,6 +6,7 @@ import { Button } from 'react-native-paper';
 import { fetchCards, deleteCard } from '../database/dbFunctions';
 import styles from './styles';
 import AddCard from './AddCard';
+import OptionsButton from './OptionsButton';
 import FlashCardScreen from './FlashcardScreen';
 
 export default function DeckScreen({ route }) {
@@ -56,8 +57,19 @@ export default function DeckScreen({ route }) {
       <Text style={styles.deckDescription}> {deck.description}</Text>
 
       {cards.length > 0 && (
-        <Button style={[styles.defaultButton, { alignSelf: 'center', marginBottom: 10 }]} onPress={() => navigation.navigate("FlashCards", { deck })}>
+        <Button 
+          style={[styles.defaultButton, { alignSelf: 'center', marginBottom: 10 }]} 
+          onPress={() => navigation.navigate("FlashCards", { deck })}
+        >
           FlashCards
+        </Button>
+      )}
+      {cards.length > 0 && (
+        <Button 
+          style={[styles.defaultButton, { alignSelf: 'center', marginBottom: 10 }]} 
+          onPress={() => navigation.navigate("MultipleChoice", { deck })}
+        >
+          Multiple-Choice
         </Button>
       )}
 
@@ -75,13 +87,13 @@ export default function DeckScreen({ route }) {
             <Text style={styles.cardTitle}>
               {item.showAnswer ? item.answer : item.question}
             </Text>
-            <Button
-              style={styles.deleteButton}
-              mode="contained"
-              onPress={() => handleDeleteCard(item.id)}
-            >
-              Delete
-            </Button>
+            <View style={{ position: 'absolute', right: 5, top: 5 }}>
+              <OptionsButton
+                actions={[
+                  { label: "Delete", onPress: () => handleDeleteCard(item.id) }
+                ]}
+              />
+            </View>
           </TouchableOpacity>
         )}
       />

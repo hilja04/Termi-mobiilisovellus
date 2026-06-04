@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Menu, IconButton } from "react-native-paper";
 
-export default function OptionsButton({ onEdit, onDelete }) {
+export default function OptionsButton({ actions = [] }) {
     const [visible, setVisible] = useState(false);
 
     return (
@@ -15,20 +15,16 @@ export default function OptionsButton({ onEdit, onDelete }) {
                 />
             }
         >
-            <Menu.Item
-                onPress={() => {
-                    setVisible(false)
-                    onEdit();
-                }}
-                title="Edit"
-            />
-            <Menu.Item
-                onPress={() => {
-                    setVisible(false)
-                    onDelete();
-                }}
-                title="Delete"
-            />
+            {actions.map((action, index) => (
+                <Menu.Item
+                    key={index}
+                    title={action.label}
+                    onPress={() => {
+                    setVisible(false);
+                    action.onPress();
+                    }}
+                />
+            ))}
 
         </Menu>
 

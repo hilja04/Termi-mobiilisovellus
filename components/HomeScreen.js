@@ -48,11 +48,11 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
-
+      
       {decks.length === 0 && (
-        <Text style={styles.notifyText}>{"No decks yet — start by adding one!"}</Text>
-      )}
-
+          <Text style={styles.notifyText}>{"No decks yet — start by adding one!"}</Text>
+        )}
+      
       {/* List of decks */}
       <FlatList
         data={decks}
@@ -62,18 +62,18 @@ export default function HomeScreen() {
             <TouchableOpacity onPress={() => navigation.navigate("DeckScreen", { deck: item })}>
               <View style={styles.deck}>
                 <Text style={styles.cardTitle}>{item.title}</Text>
-                <View style={{ position: 'absolute', right: 5, top: 5 }}>
-                  <OptionsButton
-                    onEdit={() => {
-                      setSelectedDeck(item);
-                    }}
-                    onDelete={() => handleDeleteDeck(item.id)}
-                  />
+                  <View style={{position:'absolute',right:5,top:5}}>
+                  <OptionsButton 
+                    actions={[
+                      { label: "Edit", onPress: () => setSelectedDeck(item) },
+                      { label: "Delete", onPress: () => handleDeleteDeck(item.id) }
+                    ]}
+                   />
+                  </View>
                 </View>
-              </View>
-
+              
             </TouchableOpacity>
-
+              
           </View>
         )}
       />
