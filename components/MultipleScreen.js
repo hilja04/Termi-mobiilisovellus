@@ -9,9 +9,9 @@ export default function MultipleScreen({ route }) {
     const { deck } = route.params;
     const db = useSQLiteContext();
 
-    const [gameCards, setGameCards] = useState([]);
-    const [gameFinished, setGameFinished] = useState(false)
-    const [currentIndex, setCurrentIndex] = useState(0);
+    const [cards, setCards] = useState([]);
+    const [finished, setFinished] = useState(false)
+    const [index, setIndex] = useState(0);
     const [score, setScore] = useState({ correct: 0, incorrect: 0 });
     const [choices, setChoices] = useState([]);
     const [selected, setSelected] = useState(null);
@@ -20,9 +20,9 @@ export default function MultipleScreen({ route }) {
     //fetching cards from db
     useEffect(() => {
         const load = async () => {
-            const cards = await fetchCards(db, deck.id);
-            const shuffled = cards.sort(() => Math.random() - 0.5); //shuffles cards before game starts
-            setGameCards(shuffled);
+            const data = await fetchCards(db, deck.id);
+            const shuffled = data.sort(() => Math.random() - 0.5); //shuffles cards before game starts 
+            setCards(shuffled);
             generateChoices(shuffled, 0) 
         };
         load();
@@ -48,13 +48,13 @@ export default function MultipleScreen({ route }) {
 
     //Moves to next card or finishes the game
     const nextCard = () => {
-        const next = currentIndex + 1;
+        const next = index + 1;
 
-        if (next < gameCards.length) {
-            setCurrentIndex(next);
-            generateChoices(gameCards, next);
+        if (next < cards.length) {
+            setIndex(next);
+            generateChoices(cards, next);
         } else {
-            setGameFinished(true);
+            setFinished(true);
         }
     };
 
@@ -64,7 +64,7 @@ export default function MultipleScreen({ route }) {
         setSelected(choice);
         setChecked(true);
 
-        const correct = gameCards[currentIndex].answer;
+        const correct = cards[index].answer;
 
         if (choice === correct) {
             setScore(prev => ({ ...prev, correct: prev.correct + 1 }));
@@ -74,14 +74,14 @@ export default function MultipleScreen({ route }) {
     };
 
     const resetGame = () => {
-        setGameFinished(false);
-        setCurrentIndex(0);
+        setFinished(false);
+        setIndex(0);
         setScore({ correct: 0, incorrect: 0 })
-        generateChoices(gameCards, 0);
+        generateChoices(cards, 0);
     }
 
     // Game doesn't start if less than three cards in the deck
-    if (gameCards.length < 3) {
+    if (cards.length < 3) {
         return (
             <View style={styles.flashcardContainer}>
                 <Text style={styles.deckDescription}>
@@ -90,18 +90,17 @@ export default function MultipleScreen({ route }) {
             </View>
         );
     }
-    const current = gameCards[currentIndex];
 
     return (
         <View style={styles.flashcardContainer}>
 
             <Text style={styles.modalHeader}>{deck.title}</Text>
-            <Text>Choose the right answer below</Text>
 
-            {!gameFinished ? (
+            {!finished ? (
                 <>
+                    <Text>Choose the right answer below</Text>
                     <TouchableOpacity style={styles.deck}>
-                        <Text style={styles.cardTitle}>{current.question}</Text>
+                        <Text style={styles.cardTitle}>{cards[index]?.question}</Text>
                     </TouchableOpacity>
 
                     {/* Choices*/}
@@ -110,8 +109,8 @@ export default function MultipleScreen({ route }) {
                             key={i}
                             style={[styles.choiceButton,
                             //Logic for turning answer either green or red
-                            checked && choice === current.answer && { backgroundColor: "green" },
-                            checked && selected === choice && choice !== current.answer && { backgroundColor: "red" },
+                            checked && choice === cards[index]?.answer && { backgroundColor: "green" },
+                            checked && selected === choice && choice !== cards[index]?.answer && { backgroundColor: "red" },
                             ]}
                             onPress={() => handleSelect(choice)}>
 

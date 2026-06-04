@@ -56,25 +56,34 @@ export default function DeckScreen({ route }) {
 
       <Text style={styles.deckDescription}> {deck.description}</Text>
 
-      {cards.length > 0 && (
-        <Button 
-          style={[styles.defaultButton, { alignSelf: 'center', marginBottom: 10 }]} 
-          onPress={() => navigation.navigate("FlashCards", { deck })}
-        >
-          FlashCards
-        </Button>
-      )}
-      {cards.length > 0 && (
-        <Button 
-          style={[styles.defaultButton, { alignSelf: 'center', marginBottom: 10 }]} 
-          onPress={() => navigation.navigate("MultipleChoice", { deck })}
-        >
-          Multiple-Choice
-        </Button>
+       {cards.length === 0 && (
+        <Text style={styles.notifyText}>{"No cards yet — add one!"}</Text>
       )}
 
-      {cards.length === 0 && (
-        <Text style={styles.notifyText}>{"No cards yet — add one!"}</Text>
+      {/*Game options */}
+      {cards.length > 0 && (
+        <>
+          <Button
+            style={[styles.defaultButton, { alignSelf: 'center', marginBottom: 10 }]}
+            onPress={() => navigation.navigate("FlashCards", { deck })}
+          >
+            FlashCards
+          </Button>
+
+          <Button
+            style={[styles.defaultButton, { alignSelf: 'center', marginBottom: 10 }]}
+            onPress={() => navigation.navigate("MultipleChoice", { deck })}
+          >
+            Multiple-Choice
+          </Button>
+
+          <Button
+            style={[styles.defaultButton, { alignSelf: 'center', marginBottom: 10 }]}
+            onPress={() => navigation.navigate("WritingScreen", { deck })}
+          >
+            Written exam
+          </Button>
+        </>
       )}
 
       {/* List of cards */}
@@ -101,7 +110,5 @@ export default function DeckScreen({ route }) {
       <AddCard onCardAdded={loadCards} deck_id={deck.id} />
 
     </View>
-
-
   );
 }
