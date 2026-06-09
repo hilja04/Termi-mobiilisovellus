@@ -3,7 +3,7 @@ import { useEffect, useState, } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback } from 'react';
 import { View, Text, useWindowDimensions } from 'react-native';
-import { List } from 'react-native-paper';
+import { Button, List } from 'react-native-paper';
 import styles from './styles';
 import { fetchDecks } from '../database/dbFunctions';
 import { FlatList } from 'react-native';
@@ -32,11 +32,12 @@ export default function LibraryScreen() {
         data={decks}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
-
           <List.Accordion
             title={item.title}
             description={item.description}
-            left={props => <List.Icon {...props} icon="clipboard-list" />}>
+            left={props => <List.Icon {...props} icon="clipboard-list" />}
+            >
+              
             <List.Item title={`Cards: ${item.cardCount}`} />
             <List.Item title={`Plays: ${item.testCount}`} />
             <List.Item
@@ -58,11 +59,9 @@ export default function LibraryScreen() {
                 }`}
             />
           </List.Accordion>
-
+          
         )}
       />
-
-
     </View>
   );
 }

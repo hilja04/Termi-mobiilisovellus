@@ -2,7 +2,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../components/HomeScreen';
 import LibraryScreen from '../components/LibraryScreen';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import HomeStackNavigator from './StackNavigator';
+import HomeStackNavigator from './HomeStackNavigator';
+import LibraryStackNavigator from './LibraryStackNavigator';
 
 //Tab navigator (Home & Library)
 const Tab = createBottomTabNavigator();
@@ -39,7 +40,10 @@ export default function TabNavigator() {
             />
             <Tab.Screen
                 name="Library"
-                component={LibraryScreen} />
+                component={LibraryStackNavigator}
+                options={{ headerShown: false }}
+            />
+                
         </Tab.Navigator>
 
     );
