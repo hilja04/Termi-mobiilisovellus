@@ -1,6 +1,6 @@
 import { useSQLiteContext } from "expo-sqlite";
 import { useEffect, useState } from "react";
-import { fetchCards } from "../database/dbFunctions";
+import { fetchCards, saveTestResult } from "../database/dbFunctions";
 import { View, Text, TouchableOpacity } from "react-native";
 import { Button } from "react-native-paper";
 import styles from "./styles";
@@ -23,6 +23,14 @@ export default function FlashCardScreen({ route }) {
         };
         load();
     }, []);
+    useEffect(() => {
+        if (gameFinished) {
+            const save = async () => {
+                await saveTestResult(db, deck.id, score.correct);
+            };
+            save();
+        }
+    }, [gameFinished]);
 
     //Sets showAnswer true
     const toggleCard = () => setShowAnswer(!showAnswer)
@@ -64,7 +72,7 @@ export default function FlashCardScreen({ route }) {
         <View style={styles.flashcardContainer}>
 
             <Text style={styles.modalHeader}>{deck.title}</Text>
-            
+
             {!gameFinished ? (
                 <>
                     <Text style={{ fontSize: 15 }}>

@@ -1,8 +1,36 @@
 import { useSQLiteContext } from 'expo-sqlite';
 
-//fetches all decks
 export async function fetchDecks(db) {
-    return db.getAllAsync('SELECT * FROM deck');
+  return db.getAllAsync(`
+    SELECT 
+      d.*,
+      -- Korttien määrä
+      (SELECT COUNT(*) 
+       FROM card c 
+       WHERE c.deck_id = d.id) AS cardCount,
+
+      -- Testien määrä
+      (SELECT COUNT(*) 
+       FROM test_results t 
+       WHERE t.deck_id = d.id) AS testCount,
+
+      -- Paras tulos
+      (SELECT MAX(score) 
+       FROM test_results t 
+       WHERE t.deck_id = d.id) AS bestScore,
+
+      -- Huonoin tulos
+      (SELECT MIN(score) 
+       FROM test_results t 
+       WHERE t.deck_id = d.id) AS worstScore,
+
+      -- Keskimääräinen tulos
+      (SELECT AVG(score) 
+       FROM test_results t 
+       WHERE t.deck_id = d.id) AS averageScore
+
+    FROM deck d
+  `);
 }
 
 //Creates New Deck
@@ -40,4 +68,10 @@ export async function deleteCard(db, id) {
         'DELETE FROM card WHERE id = ?',
         [id]
     );
+}
+export async function saveTestResult(db, deck_id, score, total) {
+  return db.runAsync(
+    `INSERT INTO test_results (deck_id, score, total) VALUES (?, ?, ?)`,
+    [deck_id, score, total]
+  );
 }

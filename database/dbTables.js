@@ -16,3 +16,11 @@ export const createCardTable = `
     FOREIGN KEY (deck_id) REFERENCES deck(id) ON DELETE CASCADE
   );
 `;
+export const createTestResultTable = `
+  CREATE TABLE IF NOT EXISTS test_results(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  deck_id INTEGER NOT NULL,
+  score INTEGER NOT NULL,
+  FOREIGN KEY(deck_id) REFERENCES deck(id)
+  );
+`;

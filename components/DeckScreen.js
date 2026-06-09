@@ -1,4 +1,5 @@
 import { useSQLiteContext } from 'expo-sqlite';
+import { useLayoutEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
 import { FlatList, View, Text, TouchableOpacity, Alert } from 'react-native'
@@ -23,6 +24,20 @@ export default function DeckScreen({ route }) {
   useEffect(() => {
     loadCards();
   }, [])
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <OptionsButton
+          actions={[
+            { label: "FlashCards", onPress: () => navigation.navigate("FlashCards", { deck }) },
+            { label: "Multiple Choice", onPress: () => navigation.navigate("MultipleChoice", { deck }) },
+            { label: "Written Exam", onPress: () => navigation.navigate("WritingScreen", { deck }) },
+          ]}
+        />
+      )
+    });
+  }, [navigation, deck]);
 
   const handleDeleteCard = async (id) => {
     Alert.alert(
@@ -56,34 +71,8 @@ export default function DeckScreen({ route }) {
 
       <Text style={styles.deckDescription}> {deck.description}</Text>
 
-       {cards.length === 0 && (
+      {cards.length === 0 && (
         <Text style={styles.notifyText}>{"No cards yet — add one!"}</Text>
-      )}
-
-      {/*Game options */}
-      {cards.length > 0 && (
-        <>
-          <Button
-            style={[styles.defaultButton, { alignSelf: 'center', marginBottom: 10 }]}
-            onPress={() => navigation.navigate("FlashCards", { deck })}
-          >
-            FlashCards
-          </Button>
-
-          <Button
-            style={[styles.defaultButton, { alignSelf: 'center', marginBottom: 10 }]}
-            onPress={() => navigation.navigate("MultipleChoice", { deck })}
-          >
-            Multiple-Choice
-          </Button>
-
-          <Button
-            style={[styles.defaultButton, { alignSelf: 'center', marginBottom: 10 }]}
-            onPress={() => navigation.navigate("WritingScreen", { deck })}
-          >
-            Written exam
-          </Button>
-        </>
       )}
 
       {/* List of cards */}
@@ -99,7 +88,7 @@ export default function DeckScreen({ route }) {
             <View style={{ position: 'absolute', right: 5, top: 5 }}>
               <OptionsButton
                 actions={[
-                  { label: "Delete", onPress: () => handleDeleteCard(item.id) }
+                  { label: "Delete", onPress: () => handleDeleteCard(item.id), }
                 ]}
               />
             </View>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Menu, IconButton } from "react-native-paper";
+import styles from "./styles";
 
 export default function OptionsButton({ actions = [] }) {
     const [visible, setVisible] = useState(false);
@@ -10,6 +11,7 @@ export default function OptionsButton({ actions = [] }) {
             onDismiss={() => setVisible(false)}
             anchor={
                 <IconButton
+                    iconColor="black"
                     icon="dots-vertical"
                     onPress={() => setVisible(true)}
                 />
@@ -17,11 +19,12 @@ export default function OptionsButton({ actions = [] }) {
         >
             {actions.map((action, index) => (
                 <Menu.Item
+                    style={styles.options}
                     key={index}
                     title={action.label}
                     onPress={() => {
-                    setVisible(false);
-                    action.onPress();
+                        setVisible(false);
+                        action.onPress();
                     }}
                 />
             ))}

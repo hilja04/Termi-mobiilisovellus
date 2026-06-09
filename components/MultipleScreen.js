@@ -23,13 +23,13 @@ export default function MultipleScreen({ route }) {
             const data = await fetchCards(db, deck.id);
             const shuffled = data.sort(() => Math.random() - 0.5); //shuffles cards before game starts 
             setCards(shuffled);
-            generateChoices(shuffled, 0) 
+            generateChoices(shuffled, 0)
         };
         load();
     }, []);
 
-    
-    const generateChoices = (cards, index) => { 
+
+    const generateChoices = (cards, index) => {
         const current = cards[index];
 
         //Sets wrong answers from other cards
@@ -119,7 +119,7 @@ export default function MultipleScreen({ route }) {
                             </Text>
                         </TouchableOpacity>
                     ))}
-                    
+
                     {/* Shows next button after selection */}
                     {checked && (
                         <Button

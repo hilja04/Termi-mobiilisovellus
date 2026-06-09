@@ -114,18 +114,6 @@ export default StyleSheet.create({
         elevation: 5,
         borderColor: 'black',
     },
-
-    deleteButton: {
-        position: 'absolute',
-        width: "30%",
-        height: 45,
-        backgroundColor: "red",
-        alignSelf: "flex-end",
-        bottom: 20,
-        right: 20
-
-
-    },
     saveButton: {
         backgroundColor: "#C55FFC",
         margin: 3,
@@ -155,10 +143,16 @@ export default StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
     },
-
     choiceText: {
         color: "white",
         fontSize: 16,
         textAlign: "center",
     },
+    options: {
+        borderWidth: 2,
+        borderColor: "#918888",
+        borderRadius: 6,
+        marginHorizontal: 8,
+        marginVertical: 3,
+    }
 })

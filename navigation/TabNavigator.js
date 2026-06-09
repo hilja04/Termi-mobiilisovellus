@@ -1,10 +1,10 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../components/HomeScreen';
-import SettingsScreen from '../components/SettingsScreen';
+import LibraryScreen from '../components/LibraryScreen';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import HomeStackNavigator from './StackNavigator';
 
-//Tab navigator (Home & Settings)
+//Tab navigator (Home & Library)
 const Tab = createBottomTabNavigator();
 
 export default function TabNavigator() {
@@ -16,8 +16,8 @@ export default function TabNavigator() {
 
                     if (route.name === 'Home') {
                         iconName = 'home';
-                    } else if (route.name === 'Settings') {
-                        iconName = 'settings';
+                    } else if (route.name === 'Library') {
+                        iconName = 'library';
                     }
 
                     return <Ionicons name={iconName} size={size} color={color} />;
@@ -38,8 +38,8 @@ export default function TabNavigator() {
                 options={{ headerShown: false }}
             />
             <Tab.Screen
-                name="Settings"
-                component={SettingsScreen} />
+                name="Library"
+                component={LibraryScreen} />
         </Tab.Navigator>
 
     );
