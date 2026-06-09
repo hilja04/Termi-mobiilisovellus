@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 export default StyleSheet.create({
 
     container: {
-        backgroundColor: '#d6d3d8',
+        backgroundColor: '#b87fde',
         flex: 1,
         position: 'relative',
     },
@@ -26,27 +26,27 @@ export default StyleSheet.create({
         color: '#333',
     },
     deck: {
-        backgroundColor: '#ac5fdb',
+        backgroundColor: '#9e4ec6', // hieman kirkkaampi, mutta lähes sama sävy
         padding: 15,
         marginVertical: 12,
         marginHorizontal: 12,
         borderRadius: 15,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 6 },
-        shadowOpacity: 0.3,
-        shadowRadius: 6,
-        elevation: 6,
-        height: 150,
-        width: "80%",
+        shadowColor: '#000000',
+        elevation: 12,
+        borderWidth: 3,
+        borderColor: '#974cbc',
+        height: 150,   
+        width: "80%", 
         alignSelf: "center",
         justifyContent: "center",
         alignItems: "center",
-
     },
+
     cardTitle: {
         position: "absolute",
         textAlign: "center",
         fontSize: 20,
+        fontWeight:500,
 
     },
 
@@ -60,7 +60,7 @@ export default StyleSheet.create({
     },
     deckDescription: {
         fontSize: 15,
-        padding: 13,
+        marginTop: 10,
         alignSelf: 'center',
     },
 
@@ -92,19 +92,24 @@ export default StyleSheet.create({
         backgroundColor: 'rgba(0, 0, 0, 0.6)',
     },
     buttonLabel: {
-        fontSize: 15,
-        color: 'black',
+        fontSize:15,
+        fontWeight:"bold", 
+        color:"#412554"
     },
     addButton: {
         position: 'absolute',
         bottom: 20,
         right: 20,
-        width: 90,
+        width: 10,
         height: 40,
-        backgroundColor: '#fef7fc',
+        backgroundColor: '#b87fde',
         borderRadius: 10,
         elevation: 5,
-        borderColor: 'black',
+        borderColor: '#8a40bc',
+        borderWidth:2,
+        opacity:0.9,
+        zIndex: 999,
+
     },
     defaultButton: {
         width: 90,
@@ -143,6 +148,7 @@ export default StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
     },
+
     choiceText: {
         color: "white",
         fontSize: 16,

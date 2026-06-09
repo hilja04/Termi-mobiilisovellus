@@ -12,7 +12,7 @@ export default function HomeStackNavigator() {
     return (
         <Stack.Navigator
             screenOptions={{
-                headerStyle: { backgroundColor: '#505050' },
+                headerStyle: { backgroundColor: '#8e4bb0' },
                 headerTintColor: '#fff',
             }}
         >

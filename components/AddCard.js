@@ -29,7 +29,7 @@ export default function AddCard({ onCardAdded, deck_id }) {
                 style={styles.addButton}
                 labelStyle={styles.buttonLabel}
             >
-                Add
+                +
             </Button>
 
             <Modal

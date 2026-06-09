@@ -71,6 +71,8 @@ export default function DeckScreen({ route }) {
 
       <Text style={styles.deckDescription}> {deck.description}</Text>
 
+      <AddCard onCardAdded={loadCards} deck_id={deck.id} />
+
       {cards.length === 0 && (
         <Text style={styles.notifyText}>{"No cards yet — add one!"}</Text>
       )}
@@ -96,7 +98,6 @@ export default function DeckScreen({ route }) {
         )}
       />
       {/* Component to add decks */}
-      <AddCard onCardAdded={loadCards} deck_id={deck.id} />
 
     </View>
   );

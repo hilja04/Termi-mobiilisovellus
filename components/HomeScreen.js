@@ -48,6 +48,7 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
+        <AddDeck onDeckAdded={loadDecks} />
 
       {decks.length === 0 && (
         <Text style={styles.notifyText}>{"No decks yet — start by adding one!"}</Text>
@@ -58,7 +59,6 @@ export default function HomeScreen() {
         data={decks}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
-          <View >
             <TouchableOpacity onPress={() => navigation.navigate("DeckScreen", { deck: item })}>
               <View style={styles.deck}>
                 <Text style={styles.cardTitle}>{item.title}</Text>
@@ -71,14 +71,12 @@ export default function HomeScreen() {
                   />
                 </View>
               </View>
-
             </TouchableOpacity>
 
-          </View>
         )}
       />
       {/* Component to add decks */}
-      <AddDeck onDeckAdded={loadDecks} />
+    
 
       {selectedDeck && (
         <EditDeck

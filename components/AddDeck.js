@@ -29,7 +29,7 @@ export default function AddDeck({ onDeckAdded }) {
                 style={styles.addButton}
                 labelStyle={styles.buttonLabel}
             >
-                Add
+                +
             </Button>
 
             <Modal

@@ -27,17 +27,19 @@ export default function LibraryScreen() {
 
 
   return (
-    <View >
+    <View style={styles.container} >
       <FlatList
         data={decks}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <List.Accordion
             title={item.title}
+            titleStyle={{ color: "black", fontWeight: "bold" }}
+            style={{ backgroundColor: "#b87fde", borderWidth: 0.5, }}
             description={item.description}
             left={props => <List.Icon {...props} icon="clipboard-list" />}
-            >
-              
+          >
+
             <List.Item title={`Cards: ${item.cardCount}`} />
             <List.Item title={`Plays: ${item.testCount}`} />
             <List.Item
@@ -51,6 +53,7 @@ export default function LibraryScreen() {
                 ? `${item.worstScore} / ${item.cardCount}`
                 : "no results"
                 }`}
+
             />
             <List.Item
               title={`Average: ${item.testCount > 0
@@ -59,7 +62,7 @@ export default function LibraryScreen() {
                 }`}
             />
           </List.Accordion>
-          
+
         )}
       />
     </View>

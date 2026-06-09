@@ -24,13 +24,11 @@ export default function TabNavigator() {
                     return <Ionicons name={iconName} size={size} color={color} />;
                 },
                 tabBarActiveTintColor: 'tomato',
-                tabBarInactiveTintColor: 'gray',
+                tabBarInactiveTintColor: '#323132',
                 tabBarStyle: {
-                    backgroundColor: '#505050',
+                    backgroundColor: '#8e4bb0',
 
                 },
-                headerStyle: { backgroundColor: '#505050' },
-                headerTintColor: '#fff',
             })}
         >
             <Tab.Screen
