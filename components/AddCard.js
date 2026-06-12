@@ -1,21 +1,20 @@
 import { useState } from "react";
 import { Modal, View, Text, } from "react-native";
-import { Button, TextInput } from "react-native-paper";
+import { Button, IconButton, TextInput } from "react-native-paper";
 import { useSQLiteContext } from "expo-sqlite";
+import { LinearGradient } from "expo-linear-gradient";
 import { saveCard } from "../database/dbFunctions";
 import styles from "./styles";
 
 export default function AddCard({ onCardAdded, deck_id }) {
-    //get database
-    const db = useSQLiteContext();
-
+    const db = useSQLiteContext(); //Access database
     const [showModal, setShowModal] = useState(false);
     const [question, setQuestion] = useState("");
     const [answer, setAnswer] = useState("");
 
     const handleSaveCard = async () => {
         await saveCard(db, deck_id, question, answer);
-        await onCardAdded(); // Updates the list of decks in HomeScreen
+        await onCardAdded();
         setQuestion("");
         setAnswer("");
         setShowModal(false);
@@ -23,14 +22,14 @@ export default function AddCard({ onCardAdded, deck_id }) {
 
     return (
         <>
-            <Button
+            <IconButton
+                icon="plus-box"
                 mode="outlined"
-                onPress={() => setShowModal(true)}
+                iconColor="#424143"
+                size={30}
                 style={styles.addButton}
-                labelStyle={styles.buttonLabel}
-            >
-                +
-            </Button>
+                onPress={() => setShowModal(true)}
+            />
 
             <Modal
                 animationType="fade"
@@ -39,42 +38,44 @@ export default function AddCard({ onCardAdded, deck_id }) {
                 onRequestClose={() => setShowModal(false)}
             >
                 <View style={styles.modalBackground}>
-                    <View style={styles.deckModal}>
+                    <LinearGradient
+                        colors={['#e0d6f4', '#5b565f']}
+                        start={{ x: 1, y: 0.1 }}
+                        end={{ x: 0, y: 0 }}
+                        style={styles.deckModal}
+                    >
+                        <IconButton
+                            icon="window-close"
+                            style={styles.cancelButton}
+                            onPress={() => setShowModal(false)}
+                        />
+
                         <Text style={styles.modalHeader}>Create a new Card</Text>
 
                         <TextInput
                             style={styles.input}
-                            placeholder="Write a word.."
+                            placeholder="Term"
                             value={question}
                             onChangeText={setQuestion}
                         />
 
                         <TextInput
                             style={styles.input}
-                            placeholder="Write the definition or translation.."
+                            placeholder="Definition or Translation"
                             value={answer}
                             onChangeText={setAnswer}
                         />
-
-                        <View style={styles.buttonRow}>
-                            <Button
-                                mode="contained"
-                                style={styles.saveButton}
-                                onPress={handleSaveCard}
-                            >
-                                Save Card
-                            </Button>
-
-                            <Button
-                                mode="contained"
-                                style={styles.cancelButton}
-                                onPress={() => setShowModal(false)}
-                            >
-                                Cancel
-                            </Button>
-                        </View>
-                    </View>
+                        <Button
+                            mode="contained"
+                            style={styles.saveButton}
+                            labelStyle={styles.buttonLabel}
+                            onPress={handleSaveCard}
+                        >
+                            Save
+                        </Button>
+                    </LinearGradient>
                 </View>
+
             </Modal>
         </>
     );

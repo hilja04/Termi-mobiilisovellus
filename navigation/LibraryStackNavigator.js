@@ -7,7 +7,7 @@ export default function LibraryStackNavigator() {
     return (
         <Stack.Navigator
             screenOptions={{
-                headerStyle: { backgroundColor: '#8e4bb0' },
+                headerStyle: { backgroundColor: '#252525' },
                 headerTintColor: '#fff',
             }}
         >

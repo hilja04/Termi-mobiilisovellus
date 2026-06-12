@@ -2,13 +2,13 @@ import { useSQLiteContext } from "expo-sqlite";
 import { useEffect, useState } from "react";
 import { View, Text, TextInput, KeyboardAvoidingView, Platform } from "react-native";
 import { Button } from "react-native-paper";
-import { fetchCards } from "../database/dbFunctions";
+import { LinearGradient } from "expo-linear-gradient";
+import { fetchCards, saveTestResult} from "../database/dbFunctions";
 import styles from "./styles";
 
 export default function WritingScreen({ route }) {
     const { deck } = route.params;
     const db = useSQLiteContext();
-
     const [cards, setCards] = useState([]);
     const [index, setIndex] = useState(0);
     const [answer, setAnswer] = useState("");
@@ -20,25 +20,31 @@ export default function WritingScreen({ route }) {
     useEffect(() => {
         const load = async () => {
             const data = await fetchCards(db, deck.id);
-            const shuffled = data.sort(() => Math.random() - 0.5);
+            const shuffled = data.sort(() => Math.random() - 0.5); //shuffles cards before game starts
             setCards(shuffled);
         };
         load();
     }, []);
 
-    const check = () => {
+    //Checks if answer is correct
+    const check = async () => {
         if (checked) return;
 
         const ok =
-            answer.trim().toLowerCase() === cards[index]?.answer.trim().toLowerCase(); //checks if answers correct
+            answer.trim().toLowerCase() === cards[index]?.answer.trim().toLowerCase();
 
         setCorrect(ok);
         setChecked(true);
 
-        setScore(prev => ({
-            correct: prev.correct + (ok ? 1 : 0),
-            incorrect: prev.incorrect + (ok ? 0 : 1),
-        }));
+        const newCorrect = ok ? score.correct + 1 : score.correct;
+        const newIncorrect = ok ? score.incorrect : score.incorrect + 1;
+
+        setScore({ correct: newCorrect, incorrect: newIncorrect });
+        //If last card, end game and save test results
+        if (index === cards.length - 1) {
+            setFinished(true);
+            await saveTestResult(db, deck.id, newCorrect, cards.length, "Written");
+        }
     };
 
     const next = () => {
@@ -66,15 +72,19 @@ export default function WritingScreen({ route }) {
             style={{ flex: 1 }}
             behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
-            <View style={styles.flashcardContainer}>
+            <View style={styles.multipleContainer}>
                 <Text style={styles.modalHeader}>{deck.title}</Text>
 
                 {!finished ? (
                     <>
                         <Text>Write the correct answer</Text>
-                        <View style={styles.deck}>
+                        <LinearGradient 
+                             colors={['#f3e4fe', '#c176e7', '#7a3cad']}
+                            start={{ x: 1.1, y: 1 }}
+                            end={{ x: 0, y: 0 }}
+                            style={styles.deck}>
                             <Text style={styles.cardTitle}>{cards[index]?.question}</Text>
-                        </View>
+                        </LinearGradient>
 
                         <TextInput
                             style={styles.input}

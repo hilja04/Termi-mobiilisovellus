@@ -1,14 +1,14 @@
 import { useSQLiteContext } from "expo-sqlite";
 import { useEffect, useState } from "react";
-import { fetchCards } from "../database/dbFunctions";
+import { fetchCards, saveTestResult } from "../database/dbFunctions";
 import { View, Text, TouchableOpacity } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 import { Button } from "react-native-paper";
 import styles from "./styles";
 
 export default function MultipleScreen({ route }) {
     const { deck } = route.params;
     const db = useSQLiteContext();
-
     const [cards, setCards] = useState([]);
     const [finished, setFinished] = useState(false)
     const [index, setIndex] = useState(0);
@@ -28,7 +28,6 @@ export default function MultipleScreen({ route }) {
         load();
     }, []);
 
-
     const generateChoices = (cards, index) => {
         const current = cards[index];
 
@@ -47,7 +46,7 @@ export default function MultipleScreen({ route }) {
     }
 
     //Moves to next card or finishes the game
-    const nextCard = () => {
+    const nextCard = async () => {
         const next = index + 1;
 
         if (next < cards.length) {
@@ -55,21 +54,28 @@ export default function MultipleScreen({ route }) {
             generateChoices(cards, next);
         } else {
             setFinished(true);
+            
         }
     };
 
-    const handleSelect = (choice) => {
-        if (checked) return; // Cant select again 
+    const handleSelect = async (choice) => {
+        if (checked) return;
 
         setSelected(choice);
         setChecked(true);
 
-        const correct = cards[index].answer;
+        const correctAnswer = cards[index].answer;
+        const isCorrect = choice === correctAnswer;
 
-        if (choice === correct) {
-            setScore(prev => ({ ...prev, correct: prev.correct + 1 }));
-        } else {
-            setScore(prev => ({ ...prev, incorrect: prev.incorrect + 1 }));
+        const newCorrect = isCorrect ? score.correct + 1 : score.correct;
+        const newIncorrect = isCorrect ? score.incorrect : score.incorrect + 1;
+
+        setScore({ correct: newCorrect, incorrect: newIncorrect });
+
+      
+        if (index === cards.length - 1) {
+            setFinished(true);
+            await saveTestResult(db, deck.id, newCorrect, cards.length, "Multiple-Choice");
         }
     };
 
@@ -92,16 +98,21 @@ export default function MultipleScreen({ route }) {
     }
 
     return (
-        <View style={styles.flashcardContainer}>
+        <View style={styles.multipleContainer}>
 
             <Text style={styles.modalHeader}>{deck.title}</Text>
 
             {!finished ? (
                 <>
                     <Text>Choose the right answer below</Text>
-                    <TouchableOpacity style={styles.deck}>
+                    <LinearGradient
+                        colors={['#f3e4fe', '#c176e7', '#7a3cad']}
+                        start={{ x: 1.1, y: 1 }}
+                        end={{ x: 0, y: 0 }}
+                        style={[styles.deck,{marginBottom:30}]}
+                        >
                         <Text style={styles.cardTitle}>{cards[index]?.question}</Text>
-                    </TouchableOpacity>
+                    </LinearGradient> 
 
                     {/* Choices*/}
                     {choices.map((choice, i) => (

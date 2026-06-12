@@ -24,9 +24,9 @@ export default function TabNavigator() {
                     return <Ionicons name={iconName} size={size} color={color} />;
                 },
                 tabBarActiveTintColor: 'tomato',
-                tabBarInactiveTintColor: '#323132',
+                tabBarInactiveTintColor: '#959495',
                 tabBarStyle: {
-                    backgroundColor: '#8e4bb0',
+                    backgroundColor: '#2e2e2e',
 
                 },
             })}

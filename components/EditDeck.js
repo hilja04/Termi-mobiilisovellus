@@ -7,7 +7,6 @@ import styles from "./styles";
 
 export default function EditDeck({ selectedDeck, onDeckUpdated }) {
     const db = useSQLiteContext();
-
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
 

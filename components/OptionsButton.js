@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Menu, IconButton } from "react-native-paper";
 import styles from "./styles";
 
-export default function OptionsButton({ actions = [] }) {
+export default function OptionsButton({ actions = [], color= "black" }) { // gives black as default color if color is not provided
     const [visible, setVisible] = useState(false);
 
     return (
@@ -11,7 +11,7 @@ export default function OptionsButton({ actions = [] }) {
             onDismiss={() => setVisible(false)}
             anchor={
                 <IconButton
-                    iconColor="black"
+                    iconColor={color}
                     icon="dots-vertical"
                     onPress={() => setVisible(true)}
                 />

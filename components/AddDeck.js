@@ -1,21 +1,20 @@
 import { useState } from "react";
 import { Modal, View, Text, } from "react-native";
-import { Button, TextInput } from "react-native-paper";
+import { Button,IconButton, TextInput } from "react-native-paper";
 import { useSQLiteContext } from "expo-sqlite";
+import { LinearGradient } from 'expo-linear-gradient';
 import { saveDeck } from "../database/dbFunctions";
 import styles from "./styles";
 
 export default function AddDeck({ onDeckAdded }) {
-    //get database
     const db = useSQLiteContext();
-
     const [showModal, setShowModal] = useState(false);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
 
     const handleSaveDeck = async () => {
         await saveDeck(db, title, description);
-        await onDeckAdded(); // Updates the list of decks in HomeScreen
+        await onDeckAdded();  // updates the list of decks in HomeScreen
         setTitle("");
         setDescription("");
         setShowModal(false);
@@ -23,14 +22,15 @@ export default function AddDeck({ onDeckAdded }) {
 
     return (
         <>
-            <Button
+            <IconButton
+                icon="plus-box"
                 mode="outlined"
-                onPress={() => setShowModal(true)}
+                iconColor="#424143"
+                size={30}
                 style={styles.addButton}
-                labelStyle={styles.buttonLabel}
-            >
-                +
-            </Button>
+                onPress={() => setShowModal(true)}
+               
+            />
 
             <Modal
                 animationType="fade"
@@ -39,7 +39,19 @@ export default function AddDeck({ onDeckAdded }) {
                 onRequestClose={() => setShowModal(false)}
             >
                 <View style={styles.modalBackground}>
-                    <View style={styles.deckModal}>
+                    <LinearGradient
+                        colors={['#e0d6f4', '#5b565f']}  
+                        start={{ x: 1, y: 0.1 }}
+                        end={{ x: 0, y: 0 }}
+                        style={styles.deckModal}
+                        >
+
+                        <IconButton
+                                icon="window-close"
+                                style={styles.cancelButton}
+                                onPress={() => setShowModal(false)}
+                            />
+
                         <Text style={styles.modalHeader}>Create a new deck</Text>
 
                         <TextInput
@@ -55,26 +67,19 @@ export default function AddDeck({ onDeckAdded }) {
                             value={description}
                             onChangeText={setDescription}
                         />
+                        <Button
+                             mode="contained"
+                             style={styles.saveButton}
+                             labelStyle={styles.buttonLabel}
+                             onPress={handleSaveDeck}
+                        >
+                            Save
+                         </Button>
 
-                        <View style={styles.buttonRow}>
-                            <Button
-                                mode="contained"
-                                style={styles.saveButton}
-                                onPress={handleSaveDeck}
-                            >
-                                Save Deck
-                            </Button>
+                        </LinearGradient>
 
-                            <Button
-                                mode="contained"
-                                style={styles.cancelButton}
-                                onPress={() => setShowModal(false)}
-                            >
-                                Cancel
-                            </Button>
-                        </View>
                     </View>
-                </View>
+                
             </Modal>
         </>
     );

@@ -1,36 +1,8 @@
 import { useSQLiteContext } from 'expo-sqlite';
 
+//Fetches decks
 export async function fetchDecks(db) {
-  return db.getAllAsync(`
-    SELECT 
-      d.*,
-      -- Korttien määrä
-      (SELECT COUNT(*) 
-       FROM card c 
-       WHERE c.deck_id = d.id) AS cardCount,
-
-      -- Testien määrä
-      (SELECT COUNT(*) 
-       FROM test_results t 
-       WHERE t.deck_id = d.id) AS testCount,
-
-      -- Paras tulos
-      (SELECT MAX(score) 
-       FROM test_results t 
-       WHERE t.deck_id = d.id) AS bestScore,
-
-      -- Huonoin tulos
-      (SELECT MIN(score) 
-       FROM test_results t 
-       WHERE t.deck_id = d.id) AS worstScore,
-
-      -- Keskimääräinen tulos
-      (SELECT AVG(score) 
-       FROM test_results t 
-       WHERE t.deck_id = d.id) AS averageScore
-
-    FROM deck d
-  `);
+    return db.getAllAsync('SELECT * FROM deck');
 }
 
 //Creates New Deck
@@ -69,9 +41,21 @@ export async function deleteCard(db, id) {
         [id]
     );
 }
-export async function saveTestResult(db, deck_id, score, total) {
-  return db.runAsync(
-    `INSERT INTO test_results (deck_id, score, total) VALUES (?, ?, ?)`,
-    [deck_id, score, total]
+//Saves tests results
+export async function saveTestResult(db, deck_id, score, total, mode) {
+  await db.runAsync(
+    `INSERT INTO test_results (deck_id, score, total, mode)
+     VALUES (?, ?, ?, ?)`,
+    [deck_id, score, total, mode]
+  );
+}
+//Fecthes test results
+export async function fetchTestHistory(db, deck_id) {
+  return db.getAllAsync(
+    `SELECT id, score, total, mode, created_at
+     FROM test_results
+     WHERE deck_id = ?
+     ORDER BY created_at DESC`,
+    [deck_id]
   );
 }

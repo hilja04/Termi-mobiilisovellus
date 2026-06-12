@@ -1,14 +1,13 @@
 import { useSQLiteContext } from 'expo-sqlite';
-import { useLayoutEffect } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { useEffect, useState } from 'react';
 import { FlatList, View, Text, TouchableOpacity, Alert } from 'react-native'
 import { Button } from 'react-native-paper';
+import { LinearGradient } from 'expo-linear-gradient';
 import { fetchCards, deleteCard } from '../database/dbFunctions';
-import styles from './styles';
 import AddCard from './AddCard';
 import OptionsButton from './OptionsButton';
-import FlashCardScreen from './FlashcardScreen';
+import styles from './styles';
 
 export default function DeckScreen({ route }) {
   const { deck } = route.params;
@@ -29,6 +28,7 @@ export default function DeckScreen({ route }) {
     navigation.setOptions({
       headerRight: () => (
         <OptionsButton
+          color='white'
           actions={[
             { label: "FlashCards", onPress: () => navigation.navigate("FlashCards", { deck }) },
             { label: "Multiple Choice", onPress: () => navigation.navigate("MultipleChoice", { deck }) },
@@ -59,7 +59,7 @@ export default function DeckScreen({ route }) {
       ])
   }
 
-  //function to turn cards
+  //Function to turn cards
   const toggleCards = (index) => {
     const updatedCards = [...cards]; // makes a copy of cards
     updatedCards[index].showAnswer = !updatedCards[index].showAnswer; // toggles showAnswer between true and false 
@@ -71,8 +71,6 @@ export default function DeckScreen({ route }) {
 
       <Text style={styles.deckDescription}> {deck.description}</Text>
 
-      <AddCard onCardAdded={loadCards} deck_id={deck.id} />
-
       {cards.length === 0 && (
         <Text style={styles.notifyText}>{"No cards yet — add one!"}</Text>
       )}
@@ -83,22 +81,33 @@ export default function DeckScreen({ route }) {
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item, index }) => (
 
-          <TouchableOpacity onPress={() => toggleCards(index)} style={styles.deck}>
-            <Text style={styles.cardTitle}>
-              {item.showAnswer ? item.answer : item.question}
-            </Text>
-            <View style={{ position: 'absolute', right: 5, top: 5 }}>
-              <OptionsButton
-                actions={[
-                  { label: "Delete", onPress: () => handleDeleteCard(item.id), }
-                ]}
-              />
-            </View>
+          <TouchableOpacity onPress={() => toggleCards(index)}>
+
+            <LinearGradient
+              colors={['#f3e4fe', '#c176e7', '#7a3cad']}
+              start={{ x: 1.1, y: 1 }}
+              end={{ x: 0, y: 0 }}
+              style={styles.deck}
+            >
+              <View style={styles.centerToLeftLine} />
+              <Text style={styles.cardTitle}>
+                {item.showAnswer ? item.answer : item.question}
+              </Text>
+
+              <View style={{ position: 'absolute', right: 5, top: 5 }}>
+                <OptionsButton
+                  actions={[
+                    { label: "Delete", onPress: () => handleDeleteCard(item.id) }
+                  ]}
+                />
+              </View>
+            </LinearGradient>
           </TouchableOpacity>
+
         )}
       />
       {/* Component to add decks */}
-
+      <AddCard onCardAdded={loadCards} deck_id={deck.id} />
     </View>
   );
 }

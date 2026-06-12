@@ -3,16 +3,16 @@ import { Alert, FlatList, Modal, Text, TextInput, TouchableOpacity, View, } from
 import { Button, Card } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { useSQLiteContext } from 'expo-sqlite';
+import { LinearGradient } from 'expo-linear-gradient';
+import { deleteDeck, fetchDecks, saveDeck, } from '../database/dbFunctions';
 import AddDeck from './AddDeck';
 import EditDeck from './EditDeck';
-import { deleteDeck, fetchDecks, saveDeck, } from '../database/dbFunctions';
 import OptionsButton from './OptionsButton';
 import styles from './styles'
 
 export default function HomeScreen() {
   const db = useSQLiteContext(); //accessing the database
   const navigation = useNavigation();
-
   const [decks, setDecks] = useState([]);
   const [selectedDeck, setSelectedDeck] = useState(null);
 
@@ -48,7 +48,6 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
-        <AddDeck onDeckAdded={loadDecks} />
 
       {decks.length === 0 && (
         <Text style={styles.notifyText}>{"No decks yet — start by adding one!"}</Text>
@@ -59,25 +58,36 @@ export default function HomeScreen() {
         data={decks}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
-            <TouchableOpacity onPress={() => navigation.navigate("DeckScreen", { deck: item })}>
-              <View style={styles.deck}>
-                <Text style={styles.cardTitle}>{item.title}</Text>
-                <View style={{ position: 'absolute', right: 5, top: 5 }}>
-                  <OptionsButton
-                    actions={[
-                      { label: "Edit", onPress: () => setSelectedDeck(item) },
-                      { label: "Delete", onPress: () => handleDeleteDeck(item.id) }
-                    ]}
-                  />
-                </View>
+          <TouchableOpacity onPress={() => navigation.navigate("DeckScreen", { deck: item })}>
+            <LinearGradient
+              colors={['#f0dbff', '#d16cda', '#8b298e']}
+              start={{ x: 1.1, y: 1 }}
+              end={{ x: 0, y: 0 }}
+              style={styles.deck}
+            >
+
+              <View style={styles.centerLine} />
+              <View style={styles.centerToLeftLine} />
+
+              <Text style={styles.cardTitle}>{item.title}</Text>
+              <View style={{ position: 'absolute', right: 5, top: 5 }}>
+                <OptionsButton
+                  actions={[
+                    { label: "Edit", onPress: () => setSelectedDeck(item) },
+                    { label: "Delete", onPress: () => handleDeleteDeck(item.id) }
+                  ]}
+                />
+
               </View>
-            </TouchableOpacity>
+            </LinearGradient>
+          </TouchableOpacity>
 
         )}
       />
       {/* Component to add decks */}
-    
+      <AddDeck onDeckAdded={loadDecks} />
 
+      {/* Component to edit Decks (called in optionButton above) */}
       {selectedDeck && (
         <EditDeck
           selectedDeck={selectedDeck}
