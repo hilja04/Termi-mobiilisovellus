@@ -40,14 +40,9 @@ export default function WritingScreen({ route }) {
         const newIncorrect = ok ? score.incorrect : score.incorrect + 1;
 
         setScore({ correct: newCorrect, incorrect: newIncorrect });
-        //If last card, end game and save test results
-        if (index === cards.length - 1) {
-            setFinished(true);
-            await saveTestResult(db, deck.id, newCorrect, cards.length, "Written");
-        }
     };
 
-    const next = () => {
+    const next = async () => {
         if (index + 1 < cards.length) {
             setIndex(index + 1);
             setAnswer("");
@@ -55,6 +50,7 @@ export default function WritingScreen({ route }) {
             setCorrect(null);
         } else {
             setFinished(true);
+            await saveTestResult(db, deck.id, score.correct, cards.length, "Written");
         }
     };
 

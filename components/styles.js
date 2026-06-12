@@ -46,6 +46,27 @@ export default StyleSheet.create({
         alignItems: "center",
        
     },
+    deckModal: {
+        width: '85%',
+        height: 330,
+        borderRadius: 15,
+        alignItems: 'center',
+        justifyContent: 'center',
+        elevation: 5,
+        boxShadow: "10px 10px 17px -12px rgba(0, 0, 0, 0.75)",
+    },
+
+    modalHeader: {
+        fontSize: 20,
+        fontWeight:500,
+        alignSelf:"center"
+    },
+    modalBackground: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(81, 60, 87, 0.6)',
+    },
     leftFill: {
         position: "absolute",
         borderTopLeftRadius:10,
@@ -61,7 +82,7 @@ export default StyleSheet.create({
         bottom: 0,
         width: 2,
         backgroundColor: "rgba(255,255,255,0.4)", 
-        left: "17%",
+        left: "15%",
         transform: [{ translateX: -1 }],
     },
 
@@ -80,13 +101,12 @@ export default StyleSheet.create({
         fontWeight:500,
 
     },
-
     notifyText: {
         flex: 1,
         alignItems: "center",
         textAlign: "center",
         fontSize: 15,
-        paddingTop: 30,
+        paddingTop: 300,
 
     },
     deckDescription: {
@@ -95,27 +115,6 @@ export default StyleSheet.create({
         alignSelf: 'center',
     },
 
-    deckModal: {
-        width: '85%',
-        height: 330,
-        borderRadius: 15,
-        alignItems: 'center',
-        justifyContent: 'center',
-        elevation: 5,
-        boxShadow: "10px 10px 17px -12px rgba(0, 0, 0, 0.75)",
-    },
-    
-    modalHeader: {
-        fontSize: 20,
-        fontWeight:500,
-        alignSelf:"center"
-    },
-    modalBackground: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'rgba(81, 60, 87, 0.6)',
-    },
     buttonLabel: {
         fontSize:15,
         color:"#000000"

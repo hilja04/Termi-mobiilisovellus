@@ -54,7 +54,7 @@ export default function MultipleScreen({ route }) {
             generateChoices(cards, next);
         } else {
             setFinished(true);
-            
+            await saveTestResult(db, deck.id, score.correct, cards.length, "Multiple-choice");
         }
     };
 
@@ -71,12 +71,6 @@ export default function MultipleScreen({ route }) {
         const newIncorrect = isCorrect ? score.incorrect : score.incorrect + 1;
 
         setScore({ correct: newCorrect, incorrect: newIncorrect });
-
-      
-        if (index === cards.length - 1) {
-            setFinished(true);
-            await saveTestResult(db, deck.id, newCorrect, cards.length, "Multiple-Choice");
-        }
     };
 
     const resetGame = () => {

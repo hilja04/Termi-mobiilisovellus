@@ -33,6 +33,11 @@ export default function LibraryScreen() {
 
   return (
     <View style={styles.container} >
+      
+       {decks.length === 0 && (
+              <Text style={styles.notifyText}>{"No decks  — start by adding one!"}</Text>
+            )}
+      
       <FlatList
         data={decks}
         keyExtractor={(item) => item.id.toString()}

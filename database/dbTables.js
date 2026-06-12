@@ -23,7 +23,7 @@ export const createTestResultTable = `
   score INTEGER NOT NULL,
   total INTEGER NOT NULL,
   mode TEXT NOT NULL,
-  created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+  created_at TEXT DEFAULT (DATE('now', 'localtime')),
   FOREIGN KEY(deck_id) REFERENCES deck(id)
   );
 `;
