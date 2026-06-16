@@ -70,7 +70,7 @@ export default function FlashCardScreen({ route }) {
 
     return (
         <View style={styles.flashcardContainer}>
-            <Text style={styles.modalHeader}>{deck.title}</Text>
+            <Text style={styles.headerStyle}>{deck.title}</Text>
 
             {!finished ? (
                 <>

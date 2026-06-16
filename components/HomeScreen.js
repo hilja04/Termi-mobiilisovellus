@@ -60,20 +60,20 @@ export default function HomeScreen() {
         renderItem={({ item }) => (
           <TouchableOpacity onPress={() => navigation.navigate("DeckScreen", { deck: item })}>
             <LinearGradient
-              colors={['#f0dbff', '#d16cda', '#8b298e']}
+              colors={['#f3e4fe', '#b56cda', '#7a3cad']}
               start={{ x: 1.1, y: 1 }}
               end={{ x: 0, y: 0 }}
               style={styles.deck}
             >
 
               <View style={styles.centerLine} />
-              <View style={styles.centerToLeftLine} />
+            
 
               <Text style={styles.cardTitle}>{item.title}</Text>
               <View style={{ position: 'absolute', right: 5, top: 5 }}>
                 <OptionsButton
                   actions={[
-                    { label: "Edit", onPress: () => setSelectedDeck(item) },
+                    { label: "Edit", onPress: () => setSelectedDeck(item)},
                     { label: "Delete", onPress: () => handleDeleteDeck(item.id) }
                   ]}
                 />

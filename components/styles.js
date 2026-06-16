@@ -5,7 +5,7 @@ export default StyleSheet.create({
     container: {
         backgroundColor: '#d3d2d3',
         flex: 1,
-        
+
     },
     flashcardContainer: {
         flex: 1,
@@ -17,14 +17,14 @@ export default StyleSheet.create({
         flex: 1,
         backgroundColor: '#d6d3d8',
         justifyContent: 'center',
-        alignItems:"center"
+        alignItems: "center"
 
     },
     input: {
         height: 50,
         borderColor: '#686868',
         borderWidth: 2,
-        marginTop: 20,
+        marginTop: 10,
         width: '75%',
         borderRadius: 8,
         paddingHorizontal: 10,
@@ -36,30 +36,31 @@ export default StyleSheet.create({
         padding: 15,
         marginVertical: 12,
         marginHorizontal: 12,
-        borderRadius:10,
+        borderRadius: 10,
         boxShadow: "10px 10px 17px -12px rgba(0,0,0,0.75)",
         elevation: 8,
-        height: 160,   
-        width: "75%", 
+        height: 160,
+        width: "75%",
         alignSelf: "center",
         justifyContent: "center",
         alignItems: "center",
-       
+
     },
     deckModal: {
         width: '85%',
-        height: 330,
+        height: 310,
+        borderColor:"#5c5c5c",
+        borderWidth:1,
         borderRadius: 15,
-        alignItems: 'center',
-        justifyContent: 'center',
         elevation: 5,
         boxShadow: "10px 10px 17px -12px rgba(0, 0, 0, 0.75)",
     },
-
-    modalHeader: {
+    headerStyle: {
         fontSize: 20,
-        fontWeight:500,
-        alignSelf:"center"
+        marginBottom: 10,
+        fontWeight: 500,
+        alignSelf: "center"
+
     },
     modalBackground: {
         flex: 1,
@@ -67,28 +68,53 @@ export default StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'rgba(81, 60, 87, 0.6)',
     },
+    modalHeaderBox: {
+        width: "100%",
+        backgroundColor: "#994cd9",
+        paddingVertical: 12,
+        paddingHorizontal: 30,
+        height:55,
+        borderTopLeftRadius: 15,
+        borderTopRightRadius: 15,
+        justifyContent: "center",
+        alignItems: "center",
+        position: "relative",
+    },
+
+    modalHeaderText: {
+        color: "white",
+        fontSize: 18,
+        fontWeight: "600",
+    },
+
+    modalClose: {
+        position: "absolute",
+        right: 5,
+        top: 3,
+    },
+    
     leftFill: {
         position: "absolute",
-        borderTopLeftRadius:10,
-        borderBottomLeftRadius:10,
+        borderTopLeftRadius: 10,
+        borderBottomLeftRadius: 10,
         left: 0,
         top: 0,
         bottom: 0,
-        width: 30,               
+        width: 30,
     },
     centerLine: {
         position: "absolute",
         top: 0,
         bottom: 0,
         width: 2,
-        backgroundColor: "rgba(255,255,255,0.4)", 
+        backgroundColor: "rgba(255,255,255,0.4)",
         left: "15%",
         transform: [{ translateX: -1 }],
     },
 
     centerToLeftLine: {
         position: "absolute",
-        bottom: "35%",
+        bottom: "30%",
         width: "90%",
         height: 2,
         backgroundColor: "rgba(255,255,255,0.4)",
@@ -98,7 +124,8 @@ export default StyleSheet.create({
         position: "absolute",
         textAlign: "center",
         fontSize: 20,
-        fontWeight:500,
+        fontWeight: 500,
+        width:"70%"
 
     },
     notifyText: {
@@ -112,19 +139,20 @@ export default StyleSheet.create({
     deckDescription: {
         fontSize: 15,
         marginTop: 10,
-        alignSelf: 'center',
+        textAlign: 'center',
+        paddingHorizontal:20,
     },
 
     buttonLabel: {
-        fontSize:15,
-        color:"#000000"
+        fontSize: 15,
+        color: "#ffffff"
     },
     addButton: {
         position: 'absolute',
         bottom: 15,
         right: 15,
-        borderWidth:3,
-        borderColor:"#424143",
+        borderWidth: 3,
+        borderColor: "#424143",
     },
     defaultButton: {
         width: 90,
@@ -135,25 +163,26 @@ export default StyleSheet.create({
         borderColor: 'black',
     },
     saveButton: {
-        backgroundColor: "#9b9b9b",
-        marginTop: 15,
+        backgroundColor: "#b56cda",
+        width: "75%",
+        marginTop: 25,
         borderRadius: 5,
         borderWidth: 2.5,
         borderColor: "#605f5f",
         boxShadow: "10px 10px 17px -12px rgba(73, 38, 83, 0.75)",
-        
+
     },
     cancelButton: {
-        position:"absolute",
-        top:10,
-        right:10
+        position: "absolute",
+        top: 10,
+        right: 10
     },
-   
+
     choiceButton: {
         padding: 12,
         borderRadius: 10,
-        borderColor:"#9051a5",
-        borderWidth:2,
+        borderColor: "#9051a5",
+        borderWidth: 2,
         marginVertical: 6,
         width: "60%",
         backgroundColor: "#ae60c8",
@@ -164,7 +193,7 @@ export default StyleSheet.create({
     choiceText: {
         color: "black",
         fontSize: 16,
-        fontWeight:500,
+        fontWeight: 500,
         textAlign: "center",
     },
     options: {
@@ -173,6 +202,8 @@ export default StyleSheet.create({
         borderRadius: 6,
         marginHorizontal: 8,
         marginVertical: 3,
-    }
-    
+        backgroundColor: "#caa1f9",
+    },
+
+
 })

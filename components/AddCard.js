@@ -39,40 +39,48 @@ export default function AddCard({ onCardAdded, deck_id }) {
             >
                 <View style={styles.modalBackground}>
                     <LinearGradient
-                        colors={['#e0d6f4', '#5b565f']}
+                        colors={['#e0e0e0', '#e0e0e0']}
                         start={{ x: 1, y: 0.1 }}
                         end={{ x: 0, y: 0 }}
                         style={styles.deckModal}
                     >
-                        <IconButton
-                            icon="window-close"
-                            style={styles.cancelButton}
-                            onPress={() => setShowModal(false)}
-                        />
 
-                        <Text style={styles.modalHeader}>Create a new Card</Text>
+                        <View style={styles.modalHeaderBox}>
+                            <Text style={styles.modalHeaderText}>Add a new card</Text>
 
-                        <TextInput
-                            style={styles.input}
-                            placeholder="Term"
-                            value={question}
-                            onChangeText={setQuestion}
-                        />
+                            <IconButton
+                                icon="window-close"
+                                iconColor="white"
+                                size={20}
+                                style={styles.modalClose}
+                                onPress={() => setShowModal(false)}
+                            />
+                        </View>
+                        <View style={{ alignItems: "center", marginTop: "20" }}>
+                            <TextInput
+                                style={styles.input}
+                                placeholder="Term"
+                                value={question}
+                                onChangeText={setQuestion}
+                                maxLength={35}
+                            />
 
-                        <TextInput
-                            style={styles.input}
-                            placeholder="Definition or Translation"
-                            value={answer}
-                            onChangeText={setAnswer}
-                        />
-                        <Button
-                            mode="contained"
-                            style={styles.saveButton}
-                            labelStyle={styles.buttonLabel}
-                            onPress={handleSaveCard}
-                        >
-                            Save
-                        </Button>
+                            <TextInput
+                                style={styles.input}
+                                placeholder="Definition or Translation"
+                                value={answer}
+                                onChangeText={setAnswer}
+                                maxLength={35}
+                            />
+                            <Button
+                                mode="contained"
+                                style={styles.saveButton}
+                                labelStyle={styles.buttonLabel}
+                                onPress={handleSaveCard}
+                            >
+                                Save
+                            </Button>
+                        </View>
                     </LinearGradient>
                 </View>
 

@@ -69,7 +69,7 @@ export default function WritingScreen({ route }) {
             behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
             <View style={styles.multipleContainer}>
-                <Text style={styles.modalHeader}>{deck.title}</Text>
+                <Text style={styles.headerStyle}>{deck.title}</Text>
 
                 {!finished ? (
                     <>

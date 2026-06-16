@@ -94,7 +94,7 @@ export default function MultipleScreen({ route }) {
     return (
         <View style={styles.multipleContainer}>
 
-            <Text style={styles.modalHeader}>{deck.title}</Text>
+            <Text style={styles.headerStyle}>{deck.title}</Text>
 
             {!finished ? (
                 <>
