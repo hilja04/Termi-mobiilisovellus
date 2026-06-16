@@ -72,6 +72,7 @@ export default function HomeScreen() {
               <Text style={styles.cardTitle}>{item.title}</Text>
               <View style={{ position: 'absolute', right: 5, top: 5 }}>
                 <OptionsButton
+                  variant='light'
                   actions={[
                     { label: "Edit", onPress: () => setSelectedDeck(item)},
                     { label: "Delete", onPress: () => handleDeleteDeck(item.id) }

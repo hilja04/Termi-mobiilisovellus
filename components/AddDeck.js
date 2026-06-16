@@ -94,7 +94,6 @@ export default function AddDeck({ onDeckAdded }) {
                             <Button
                                 mode="contained"
                                 style={styles.saveButton}
-                                labelStyle={styles.buttonLabel}
                                 onPress={handleSaveDeck}
                             >
                                 Save deck

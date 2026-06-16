@@ -5,20 +5,28 @@ export default StyleSheet.create({
     container: {
         backgroundColor: '#d3d2d3',
         flex: 1,
-
     },
     flashcardContainer: {
         flex: 1,
         backgroundColor: '#d6d3d8',
         justifyContent: 'center',
-
     },
     multipleContainer: {
         flex: 1,
         backgroundColor: '#d6d3d8',
         justifyContent: 'center',
         alignItems: "center"
-
+    },
+    gameOverContainer: {
+        width: "75%",
+        padding: 20,
+        borderRadius: 10,
+        borderColor: "#9051a5",
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: 20,
+        boxShadow: "10px 10px 17px -12px rgba(0,0,0,0.75)",
+        elevation: 8,
     },
     input: {
         height: 50,
@@ -44,7 +52,6 @@ export default StyleSheet.create({
         alignSelf: "center",
         justifyContent: "center",
         alignItems: "center",
-
     },
     deckModal: {
         width: '85%',
@@ -54,13 +61,6 @@ export default StyleSheet.create({
         borderRadius: 15,
         elevation: 5,
         boxShadow: "10px 10px 17px -12px rgba(0, 0, 0, 0.75)",
-    },
-    headerStyle: {
-        fontSize: 20,
-        marginBottom: 10,
-        fontWeight: 500,
-        alignSelf: "center"
-
     },
     modalBackground: {
         flex: 1,
@@ -80,46 +80,24 @@ export default StyleSheet.create({
         alignItems: "center",
         position: "relative",
     },
-
     modalHeaderText: {
         color: "white",
         fontSize: 18,
         fontWeight: "600",
     },
-
     modalClose: {
         position: "absolute",
         right: 5,
         top: 3,
     },
-    
-    leftFill: {
-        position: "absolute",
-        borderTopLeftRadius: 10,
-        borderBottomLeftRadius: 10,
-        left: 0,
-        top: 0,
-        bottom: 0,
-        width: 30,
-    },
-    centerLine: {
-        position: "absolute",
-        top: 0,
-        bottom: 0,
-        width: 2,
-        backgroundColor: "rgba(255,255,255,0.4)",
-        left: "15%",
-        transform: [{ translateX: -1 }],
-    },
+    headerStyle: {
+        fontSize: 20,
+        marginBottom: 10,
+        fontWeight: 500,
+        alignSelf: "center",
+        textAlign:"center"
 
-    centerToLeftLine: {
-        position: "absolute",
-        bottom: "30%",
-        width: "90%",
-        height: 2,
-        backgroundColor: "rgba(255,255,255,0.4)",
     },
-
     cardTitle: {
         position: "absolute",
         textAlign: "center",
@@ -128,24 +106,40 @@ export default StyleSheet.create({
         width:"70%"
 
     },
-    notifyText: {
-        flex: 1,
-        alignItems: "center",
-        textAlign: "center",
-        fontSize: 15,
-        paddingTop: 300,
-
-    },
     deckDescription: {
         fontSize: 15,
         marginTop: 10,
         textAlign: 'center',
         paddingHorizontal:20,
     },
-
-    buttonLabel: {
+     notifyText: {
+        flex: 1,
+        alignItems: "center",
+        textAlign: "center",
         fontSize: 15,
-        color: "#ffffff"
+        paddingTop: 300,
+    },
+    centerLine: {
+        position: "absolute",
+        top: 0,
+        bottom: 0,
+        width: 2,
+        backgroundColor: "rgba(255,255,255,0.4)",
+        left: "15%",
+    },
+    centerToLeftLine: {
+        position: "absolute",
+        width: "90%",
+        height: 2,
+        backgroundColor: "rgba(255,255,255,0.4)",
+    },
+    gameOverLine: {
+        width: "80%",
+        height: 2,
+        backgroundColor: "rgba(255,255,255,0.5)",
+        marginTop: 8,
+        marginBottom: 20,
+        alignSelf: "center",
     },
     addButton: {
         position: 'absolute',
@@ -155,12 +149,13 @@ export default StyleSheet.create({
         borderColor: "#424143",
     },
     defaultButton: {
-        width: 90,
-        height: 40,
-        backgroundColor: '#fef7fc',
+        width: "35%",
+        marginTop:15,
+        backgroundColor: '#a662c7',
+        borderWidth:2,
         borderRadius: 10,
         elevation: 5,
-        borderColor: 'black',
+        borderColor: "#73468a",
     },
     saveButton: {
         backgroundColor: "#b56cda",
@@ -172,29 +167,28 @@ export default StyleSheet.create({
         boxShadow: "10px 10px 17px -12px rgba(73, 38, 83, 0.75)",
 
     },
-    cancelButton: {
-        position: "absolute",
-        top: 10,
-        right: 10
-    },
-
     choiceButton: {
         padding: 12,
         borderRadius: 10,
-        borderColor: "#9051a5",
+        borderColor: "#9059ab",
         borderWidth: 2,
         marginVertical: 6,
-        width: "60%",
-        backgroundColor: "#ae60c8",
-        justifyContent: "center",
-        alignItems: "center",
+        width: "70%",
+        backgroundColor: "#c176e7",
     },
-
     choiceText: {
         color: "black",
         fontSize: 16,
         fontWeight: 500,
-        textAlign: "center",
+        textAlign:"center",
+        paddingHorizontal:30,
+    },
+    choiceRow:{ 
+        width: "100%", 
+        flexDirection: "row", 
+        alignItems: "center", 
+        justifyContent: "center", 
+        position: "relative",
     },
     options: {
         borderWidth: 2,
@@ -204,6 +198,5 @@ export default StyleSheet.create({
         marginVertical: 3,
         backgroundColor: "#caa1f9",
     },
-
 
 })

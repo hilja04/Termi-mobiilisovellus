@@ -59,3 +59,10 @@ export async function fetchTestHistory(db, deck_id) {
     [deck_id]
   );
 }
+//Deletes test history
+export const clearTestHistory = async (db, deck_id) => {
+  await db.runAsync(
+    "DELETE FROM test_results WHERE deck_id = ?",
+    [deck_id]
+  );
+}

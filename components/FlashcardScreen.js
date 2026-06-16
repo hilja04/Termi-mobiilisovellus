@@ -85,7 +85,6 @@ export default function FlashCardScreen({ route }) {
                             end={{ x: 0, y: 0 }}
                             style={styles.deck}
                         >
-                            <View style={styles.centerToLeftLine} />
                             <Text style={styles.cardTitle}>
                                 {showAnswer
                                     ? cards[currentIndex]?.answer

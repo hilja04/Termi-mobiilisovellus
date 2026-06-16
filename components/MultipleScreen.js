@@ -4,6 +4,7 @@ import { fetchCards, saveTestResult } from "../database/dbFunctions";
 import { View, Text, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Button } from "react-native-paper";
+import { Icon } from "react-native-paper";
 import styles from "./styles";
 
 export default function MultipleScreen({ route }) {
@@ -94,42 +95,53 @@ export default function MultipleScreen({ route }) {
     return (
         <View style={styles.multipleContainer}>
 
-            <Text style={styles.headerStyle}>{deck.title}</Text>
 
             {!finished ? (
                 <>
+                    <Text style={styles.headerStyle}>{deck.title}</Text>
                     <Text>Choose the right answer below</Text>
                     <LinearGradient
                         colors={['#f3e4fe', '#c176e7', '#7a3cad']}
                         start={{ x: 1.1, y: 1 }}
                         end={{ x: 0, y: 0 }}
-                        style={[styles.deck,{marginBottom:30}]}
-                        >
+                        style={[styles.deck, { marginBottom: 30 }]}
+                    >
                         <Text style={styles.cardTitle}>{cards[index]?.question}</Text>
-                    </LinearGradient> 
+                    </LinearGradient>
 
                     {/* Choices*/}
                     {choices.map((choice, i) => (
                         <TouchableOpacity
                             key={i}
-                            style={[styles.choiceButton,
-                            //Logic for turning answer either green or red
-                            checked && choice === cards[index]?.answer && { backgroundColor: "green" },
-                            checked && selected === choice && choice !== cards[index]?.answer && { backgroundColor: "red" },
-                            ]}
-                            onPress={() => handleSelect(choice)}>
+                            style={styles.choiceButton}
+                            onPress={() => handleSelect(choice)}
+                        >
 
-                            <Text style={styles.choiceText}>
-                                {choice}
-                            </Text>
+                            <View style={styles.choiceRow}>
+                                <Text style={styles.choiceText}>{choice}</Text>
+
+                                {checked && choice === cards[index]?.answer && (
+                                     <View style={{position:"absolute", right: 3}}>
+                                        <Icon source="check" size={22} color="limegreen"  />
+                                     </View>
+                                )}
+
+                                {checked && selected === choice && choice !== cards[index]?.answer && (
+                                    <View style={{position:"absolute", right: 3}}>
+                                        <Icon source="close" size={22} color="red"  />
+                                    </View>
+                                )}
+                            </View>
+
+
                         </TouchableOpacity>
                     ))}
 
                     {/* Shows next button after selection */}
                     {checked && (
                         <Button
-                            mode="contained"
-                            style={{ marginTop: 20 }}
+                            style={styles.defaultButton}
+                            labelStyle={{ color: "white" }}
                             onPress={nextCard}
                         >
                             Next Card
@@ -138,15 +150,27 @@ export default function MultipleScreen({ route }) {
                 </>
             ) : (
 
-                <View style={{ alignItems: 'center' }}>
-                    <Text>Game over!</Text>
-                    <Text>Correct: {score.correct}</Text>
-                    <Text>Incorrect: {score.incorrect}</Text>
+                <LinearGradient              
+                    colors={['#f3e4fe', '#b56cda', '#7a3cad']}
+                    start={{ x: 1.1, y: 1 }}
+                    end={{ x: 0, y: 0 }}
+                    style={styles.gameOverContainer}>
+                        <Text style={styles.headerStyle}>{deck.title}</Text>
+                        
+                        <View style={styles.gameOverLine} />
+                        <Text style={{fontSize:20}}>Game over!</Text>
+                        <Text style={{fontSize:20,marginTop:15}}>Score: {score.correct} / {cards.length}</Text>
+                       
 
-                    <Button onPress={resetGame} mode="outlined" style={{ margin: 10 }}>
-                        Try again!
-                    </Button>
-                </View>
+                        <Button 
+                            onPress={resetGame} 
+                            mode="outlined" 
+                            style={{ marginTop: 15, borderWidth:2, borderColor:"#74488a", borderRadius: 15 }}
+                            labelStyle={{ color: "white" }}
+                        >
+                            Try again!
+                        </Button>
+                </LinearGradient>
             )}
 
         </View>

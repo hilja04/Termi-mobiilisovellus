@@ -75,7 +75,6 @@ export default function AddCard({ onCardAdded, deck_id }) {
                             <Button
                                 mode="contained"
                                 style={styles.saveButton}
-                                labelStyle={styles.buttonLabel}
                                 onPress={handleSaveCard}
                             >
                                 Save
