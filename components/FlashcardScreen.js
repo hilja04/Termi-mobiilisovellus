@@ -68,12 +68,23 @@ export default function FlashCardScreen({ route }) {
         setScore({ correct: 0, incorrect: 0 });
     };
 
+    if (cards.length < 1) {
+        return (
+            <View style={styles.flashcardContainer}>
+                <Text style={styles.deckDescription}>
+                    Add cards to play!
+                </Text>
+            </View>
+        );
+    }
+
+
     return (
         <View style={styles.flashcardContainer}>
-            <Text style={styles.headerStyle}>{deck.title}</Text>
 
             {!finished ? (
                 <>
+                    <Text style={styles.headerStyle}>{deck.title}</Text>
                     <Text style={{ fontSize: 15, alignSelf: "center" }}>
                         Press the card to turn it around!
                     </Text>
@@ -113,15 +124,27 @@ export default function FlashCardScreen({ route }) {
                     </View>
                 </>
             ) : (
-                
-                <View style={{ alignItems: 'center' }}>
-                    <Text>Game over!</Text>
-                    <Text>Correct: {score.correct}</Text>
-                    <Text>Incorrect: {score.incorrect}</Text>
-                    <Button onPress={resetGame} mode="outlined" style={{ margin: 10 }}>
+
+                <LinearGradient
+                    colors={['#f3e4fe', '#b56cda', '#7a3cad']}
+                    start={{ x: 1.1, y: 1 }}
+                    end={{ x: 0, y: 0 }}
+                    style={[styles.gameOverContainer, { alignSelf: "center" }]}>
+                    <Text style={styles.headerStyle}>{deck.title}</Text>
+
+                    <View style={styles.gameOverLine} />
+                    <Text style={{ fontSize: 20 }}>Game over!</Text>
+                    <Text style={{ fontSize: 20, marginTop: 15 }}>Score: {score.correct} / {cards.length}</Text>
+
+                    <Button
+                        onPress={resetGame}
+                        mode="outlined"
+                        style={{ marginTop: 15, borderWidth: 2, borderColor: "#74488a", borderRadius: 15 }}
+                        labelStyle={{ color: "white" }}
+                    >
                         Try again!
                     </Button>
-                </View>
+                </LinearGradient>
             )}
         </View>
     );

@@ -63,6 +63,16 @@ export default function WritingScreen({ route }) {
         setScore({ correct: 0, incorrect: 0 });
     };
 
+    if (cards.length < 1) {
+        return (
+            <View style={styles.flashcardContainer}>
+                <Text style={styles.deckDescription}>
+                    Add cards to play!
+                </Text>
+            </View>
+        );
+    }
+
     return (
         <KeyboardAvoidingView
             style={{ flex: 1 }}
@@ -102,7 +112,7 @@ export default function WritingScreen({ route }) {
                                 {correct ? (
                                     <Text style={{ color: "green", marginTop: 20 }}>Correct!</Text>
                                 ) : (
-                                    <Text style={{ color: "red", textAlign:"center", paddingHorizontal:20, marginTop: 20 }}>
+                                    <Text style={{ color: "red", textAlign: "center", paddingHorizontal: 20, marginTop: 20 }}>
                                         Wrong! The right answer was:{" "}
                                         <Text style={{ fontWeight: "bold" }}>{cards[index]?.answer}</Text>
                                     </Text>

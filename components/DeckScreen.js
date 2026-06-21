@@ -69,8 +69,10 @@ export default function DeckScreen({ route }) {
 
   return (
     <View style={styles.container}>
-
-      <Text style={styles.deckDescription}> {deck.description}</Text>
+      
+      {cards.length > 0 && (
+        <Text style={styles.deckDescription}> {deck.description}</Text>
+      )}
 
       {cards.length === 0 && (
         <Text style={styles.notifyText}>{"No cards yet — add one!"}</Text>
