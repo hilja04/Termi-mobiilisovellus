@@ -41,7 +41,7 @@ export default function TabNavigator() {
                 component={LibraryStackNavigator}
                 options={{ headerShown: false }}
             />
-                
+
         </Tab.Navigator>
 
     );

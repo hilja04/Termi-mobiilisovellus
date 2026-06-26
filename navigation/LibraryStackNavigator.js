@@ -11,9 +11,9 @@ export default function LibraryStackNavigator() {
                 headerTintColor: '#fff',
             }}
         >
-            <Stack.Screen 
-                name="LibraryMain" 
-                component={LibraryScreen} 
+            <Stack.Screen
+                name="LibraryMain"
+                component={LibraryScreen}
                 options={{ title: "Library" }}
             />
         </Stack.Navigator>

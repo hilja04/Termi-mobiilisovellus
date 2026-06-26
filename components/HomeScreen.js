@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
+import { useSQLiteContext } from 'expo-sqlite';
 import { Alert, FlatList, Modal, Text, TextInput, TouchableOpacity, View, } from 'react-native';
 import { Button, Card } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
-import { useSQLiteContext } from 'expo-sqlite';
 import { LinearGradient } from 'expo-linear-gradient';
 import { deleteDeck, fetchDecks, saveDeck, } from '../database/dbFunctions';
 import AddDeck from './AddDeck';
@@ -67,14 +67,14 @@ export default function HomeScreen() {
             >
 
               <View style={styles.centerLine} />
-            
+
 
               <Text style={styles.cardTitle}>{item.title}</Text>
               <View style={{ position: 'absolute', right: 5, top: 5 }}>
                 <OptionsButton
                   variant='light'
                   actions={[
-                    { label: "Edit", onPress: () => setSelectedDeck(item)},
+                    { label: "Edit", onPress: () => setSelectedDeck(item) },
                     { label: "Delete", onPress: () => handleDeleteDeck(item.id) }
                   ]}
                 />

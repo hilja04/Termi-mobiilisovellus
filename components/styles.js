@@ -56,8 +56,8 @@ export default StyleSheet.create({
     deckModal: {
         width: '85%',
         height: 310,
-        borderColor:"#5c5c5c",
-        borderWidth:1,
+        borderColor: "#5c5c5c",
+        borderWidth: 1,
         borderRadius: 15,
         elevation: 5,
         boxShadow: "10px 10px 17px -12px rgba(0, 0, 0, 0.75)",
@@ -73,7 +73,7 @@ export default StyleSheet.create({
         backgroundColor: "#994cd9",
         paddingVertical: 12,
         paddingHorizontal: 30,
-        height:55,
+        height: 55,
         borderTopLeftRadius: 15,
         borderTopRightRadius: 15,
         justifyContent: "center",
@@ -95,7 +95,7 @@ export default StyleSheet.create({
         marginBottom: 10,
         fontWeight: 500,
         alignSelf: "center",
-        textAlign:"center"
+        textAlign: "center"
 
     },
     cardTitle: {
@@ -103,16 +103,16 @@ export default StyleSheet.create({
         textAlign: "center",
         fontSize: 20,
         fontWeight: 500,
-        width:"70%"
+        width: "70%"
 
     },
     deckDescription: {
         fontSize: 15,
         marginTop: 10,
         textAlign: 'center',
-        paddingHorizontal:20,
+        paddingHorizontal: 20,
     },
-     notifyText: {
+    notifyText: {
         flex: 1,
         alignItems: "center",
         textAlign: "center",
@@ -150,9 +150,9 @@ export default StyleSheet.create({
     },
     defaultButton: {
         width: "35%",
-        marginTop:15,
+        marginTop: 15,
         backgroundColor: '#a662c7',
-        borderWidth:2,
+        borderWidth: 2,
         borderRadius: 10,
         elevation: 5,
         borderColor: "#73468a",
@@ -180,14 +180,14 @@ export default StyleSheet.create({
         color: "black",
         fontSize: 16,
         fontWeight: 500,
-        textAlign:"center",
-        paddingHorizontal:30,
+        textAlign: "center",
+        paddingHorizontal: 30,
     },
-    choiceRow:{ 
-        width: "100%", 
-        flexDirection: "row", 
-        alignItems: "center", 
-        justifyContent: "center", 
+    choiceRow: {
+        width: "100%",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
         position: "relative",
     },
     options: {

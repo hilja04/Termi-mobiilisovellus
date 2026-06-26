@@ -13,13 +13,13 @@ export default function DeckScreen({ route }) {
   const { deck } = route.params;
   const db = useSQLiteContext(); //accessing the database
   const navigation = useNavigation();
-
   const [cards, setCards] = useState([]);
 
   const loadCards = async () => {
     const fetched = await fetchCards(db, deck.id);
     setCards(fetched);
   }
+
   useEffect(() => {
     loadCards();
   }, [])
@@ -69,7 +69,7 @@ export default function DeckScreen({ route }) {
 
   return (
     <View style={styles.container}>
-      
+
       {cards.length > 0 && (
         <Text style={styles.deckDescription}> {deck.description}</Text>
       )}

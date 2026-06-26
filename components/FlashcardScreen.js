@@ -78,7 +78,6 @@ export default function FlashCardScreen({ route }) {
         );
     }
 
-
     return (
         <View style={styles.flashcardContainer}>
 

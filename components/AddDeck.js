@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Modal, View, Text, } from "react-native";
-import { Button,IconButton, TextInput } from "react-native-paper";
 import { useSQLiteContext } from "expo-sqlite";
+import { Modal, View, Text, } from "react-native";
+import { Button, IconButton, TextInput } from "react-native-paper";
 import { LinearGradient } from 'expo-linear-gradient';
 import { saveDeck } from "../database/dbFunctions";
 import styles from "./styles";
@@ -11,7 +11,7 @@ export default function AddDeck({ onDeckAdded }) {
     const [showModal, setShowModal] = useState(false);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    const [titleError,setTitleError] = useState(false);
+    const [titleError, setTitleError] = useState(false);
 
     const handleSaveDeck = async () => {
 
@@ -21,11 +21,11 @@ export default function AddDeck({ onDeckAdded }) {
         }
 
         await saveDeck(db, title, description);
-        await onDeckAdded();  // updates the list of decks in HomeScreen
+        await onDeckAdded();  // reloads the list of decks
         setTitle("");
         setDescription("");
         setShowModal(false);
-         
+
     };
 
     return (
@@ -37,7 +37,7 @@ export default function AddDeck({ onDeckAdded }) {
                 size={30}
                 style={styles.addButton}
                 onPress={() => setShowModal(true)}
-               
+
             />
 
             <Modal
@@ -48,12 +48,12 @@ export default function AddDeck({ onDeckAdded }) {
             >
                 <View style={styles.modalBackground}>
                     <LinearGradient
-                        colors={['#e0e0e0', '#e0e0e0']}  
+                        colors={['#e0e0e0', '#e0e0e0']}
                         start={{ x: 1, y: 0.1 }}
                         end={{ x: 0, y: 0 }}
                         style={styles.deckModal}
-                        >
-                            
+                    >
+
                         <View style={styles.modalHeaderBox}>
                             <Text style={styles.modalHeaderText}>Create a new deck</Text>
 
@@ -71,7 +71,7 @@ export default function AddDeck({ onDeckAdded }) {
                             />
                         </View>
 
-                        <View style={{alignItems:"center", marginTop:"20"}}>
+                        <View style={{ alignItems: "center", marginTop: "20" }}>
                             <TextInput
                                 style={[styles.input, titleError && { borderColor: "red", borderWidth: 2 }]}
                                 placeholder="Title"
@@ -81,9 +81,9 @@ export default function AddDeck({ onDeckAdded }) {
                                     if (text.trim().length > 0) setTitleError(false);
                                 }}
                                 maxLength={35}
-                        
+
                             />
-                           
+
                             <TextInput
                                 style={styles.input}
                                 placeholder="Description"
@@ -99,10 +99,10 @@ export default function AddDeck({ onDeckAdded }) {
                                 Save deck
                             </Button>
                         </View>
-                        </LinearGradient>
-    
-                    </View>
-                
+                    </LinearGradient>
+
+                </View>
+
             </Modal>
         </>
     );

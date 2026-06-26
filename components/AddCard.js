@@ -1,20 +1,20 @@
 import { useState } from "react";
+import { useSQLiteContext } from "expo-sqlite";
 import { Modal, View, Text, } from "react-native";
 import { Button, IconButton, TextInput } from "react-native-paper";
-import { useSQLiteContext } from "expo-sqlite";
 import { LinearGradient } from "expo-linear-gradient";
 import { saveCard } from "../database/dbFunctions";
 import styles from "./styles";
 
 export default function AddCard({ onCardAdded, deck_id }) {
-    const db = useSQLiteContext(); //Access database
+    const db = useSQLiteContext(); // Access database
     const [showModal, setShowModal] = useState(false);
     const [question, setQuestion] = useState("");
     const [answer, setAnswer] = useState("");
 
     const handleSaveCard = async () => {
         await saveCard(db, deck_id, question, answer);
-        await onCardAdded();
+        await onCardAdded(); // Reloads the cards
         setQuestion("");
         setAnswer("");
         setShowModal(false);

@@ -12,9 +12,9 @@ export async function saveDeck(db, title, description) {
     );
 }
 //Updates selected deck
-export async function updateDeck(db,id,title,description){
+export async function updateDeck(db, id, title, description) {
     return db.runAsync(
-        'UPDATE deck SET title = ?, description = ? WHERE id = ?',[title,description,id]
+        'UPDATE deck SET title = ?, description = ? WHERE id = ?', [title, description, id]
     );
 }
 //Deletes selected deck
@@ -25,8 +25,8 @@ export async function deleteDeck(db, id) {
     );
 }
 //Fecthes all cards
-export async function fetchCards(db,deck_id) {
-    return db.getAllAsync('SELECT * FROM card WHERE deck_id = ?',[deck_id]);
+export async function fetchCards(db, deck_id) {
+    return db.getAllAsync('SELECT * FROM card WHERE deck_id = ?', [deck_id]);
 }
 //Adds a card to a deck
 export async function saveCard(db, deck_id, question, answer) {
@@ -43,26 +43,26 @@ export async function deleteCard(db, id) {
 }
 //Saves tests results
 export async function saveTestResult(db, deck_id, score, total, mode) {
-  await db.runAsync(
-    `INSERT INTO test_results (deck_id, score, total, mode)
+    await db.runAsync(
+        `INSERT INTO test_results (deck_id, score, total, mode)
      VALUES (?, ?, ?, ?)`,
-    [deck_id, score, total, mode]
-  );
+        [deck_id, score, total, mode]
+    );
 }
 //Fecthes test results
 export async function fetchTestHistory(db, deck_id) {
-  return db.getAllAsync(
-    `SELECT id, score, total, mode, created_at
+    return db.getAllAsync(
+        `SELECT id, score, total, mode, created_at
      FROM test_results
      WHERE deck_id = ?
      ORDER BY created_at DESC`,
-    [deck_id]
-  );
+        [deck_id]
+    );
 }
 //Deletes test history
 export const clearTestHistory = async (db, deck_id) => {
-  await db.runAsync(
-    "DELETE FROM test_results WHERE deck_id = ?",
-    [deck_id]
-  );
+    await db.runAsync(
+        "DELETE FROM test_results WHERE deck_id = ?",
+        [deck_id]
+    );
 }

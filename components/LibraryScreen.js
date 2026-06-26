@@ -1,10 +1,9 @@
 import { useSQLiteContext } from 'expo-sqlite';
 import { useCallback, useEffect, useState, } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
-import { FlatList, Text, View, } from 'react-native';
+import { Alert, FlatList, Text, View, } from 'react-native';
 import { Button, List, IconButton } from 'react-native-paper';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Alert } from 'react-native';
 import { fetchDecks, fetchTestHistory, clearTestHistory } from '../database/dbFunctions';
 import styles from './styles';
 
@@ -14,7 +13,6 @@ export default function LibraryScreen() {
   const [decks, setDecks] = useState([]);
   const [expanded, setExpanded] = useState(null);
 
-  //Gets deck and test results data
   const loadDecks = async () => {
     const baseDecks = await fetchDecks(db);
 
@@ -25,7 +23,7 @@ export default function LibraryScreen() {
 
   }
 
-  //Päivittää tuloset joka kerta kun sivu on fokuksessa
+  // Updates results everytime screen is in focus
   useFocusEffect(
     useCallback(() => {
       loadDecks();

@@ -16,9 +16,9 @@ export default function HomeStackNavigator() {
                 headerTintColor: '#fff',
             }}
         >
-            <Stack.Screen 
-                name="HomeScreen" 
-                component={HomeScreen} 
+            <Stack.Screen
+                name="HomeScreen"
+                component={HomeScreen}
                 options={{ title: 'Decks' }}
             />
             <Stack.Screen
@@ -29,17 +29,17 @@ export default function HomeStackNavigator() {
             <Stack.Screen
                 name="FlashCards"
                 component={FlashCardScreen}
-                options={{title:"FlashCards"}}
+                options={{ title: "FlashCards" }}
             />
             <Stack.Screen
                 name="MultipleChoice"
                 component={MultipleScreen}
-                options={{title:"Multiple-Choice"}}
+                options={{ title: "Multiple-Choice" }}
             />
             <Stack.Screen
                 name="WritingScreen"
                 component={WritingScreen}
-                options={{title:"Written exam"}}
+                options={{ title: "Written exam" }}
             />
         </Stack.Navigator>
     );

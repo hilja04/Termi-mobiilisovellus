@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
+import { useSQLiteContext } from "expo-sqlite";
 import { Modal, View, Text } from "react-native";
 import { Button, IconButton, TextInput } from "react-native-paper";
-import { useSQLiteContext } from "expo-sqlite";
 import { LinearGradient } from "expo-linear-gradient";
 import { updateDeck } from "../database/dbFunctions";
 import styles from "./styles";
@@ -11,8 +11,7 @@ export default function EditDeck({ selectedDeck, onDeckUpdated }) {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [showModal, setShowModal] = useState(false);
-    const [titleError,setTitleError] = useState(false);
-
+    const [titleError, setTitleError] = useState(false);
 
     useEffect(() => {
         if (selectedDeck) {
@@ -35,64 +34,64 @@ export default function EditDeck({ selectedDeck, onDeckUpdated }) {
 
     return (
         <>
-        <Modal
-            visible={showModal}
-            transparent
-            animationType="fade"
-            onRequestClose={() => setShowModal(false)}
-        >
+            <Modal
+                visible={showModal}
+                transparent
+                animationType="fade"
+                onRequestClose={() => setShowModal(false)}
+            >
 
-            <View style={styles.modalBackground}>
+                <View style={styles.modalBackground}>
 
-                <LinearGradient
-                    colors={['#e0e0e0', '#e0e0e0']}
-                    start={{ x: 1, y: 0.1 }}
-                    end={{ x: 0, y: 0 }}
-                    style={styles.deckModal}
-                >
-                    <View style={styles.modalHeaderBox}>
-                        <Text style={styles.modalHeaderText}>Edit deck</Text>
+                    <LinearGradient
+                        colors={['#e0e0e0', '#e0e0e0']}
+                        start={{ x: 1, y: 0.1 }}
+                        end={{ x: 0, y: 0 }}
+                        style={styles.deckModal}
+                    >
+                        <View style={styles.modalHeaderBox}>
+                            <Text style={styles.modalHeaderText}>Edit deck</Text>
 
-                        <IconButton
-                            icon="window-close"
-                            iconColor="white"
-                            size={20}
-                            style={styles.modalClose}
-                            onPress={() => {
-                                setShowModal(false); 
-                                onDeckUpdated();
-                                setTitleError(false);
-                            }}
-                        />
+                            <IconButton
+                                icon="window-close"
+                                iconColor="white"
+                                size={20}
+                                style={styles.modalClose}
+                                onPress={() => {
+                                    setShowModal(false);
+                                    onDeckUpdated();
+                                    setTitleError(false);
+                                }}
+                            />
 
-                    </View>
-                    <View style={{ alignItems: "center", marginTop: "20" }}>
-                        <TextInput
-                            style={[styles.input, titleError && { borderColor: "red", borderWidth: 2 }]}
-                            placeholder="Write new title..."
-                            value={title}
-                            onChangeText={(text) => {
+                        </View>
+                        <View style={{ alignItems: "center", marginTop: "20" }}>
+                            <TextInput
+                                style={[styles.input, titleError && { borderColor: "red", borderWidth: 2 }]}
+                                placeholder="Write new title..."
+                                value={title}
+                                onChangeText={(text) => {
                                     setTitle(text);
                                     if (text.trim().length > 0) setTitleError(false);
                                 }}
-                            maxLength={35}
-                        />
+                                maxLength={35}
+                            />
 
-                        <TextInput
-                            style={styles.input}
-                            placeholder="Write new description..."
-                            value={description}
-                            onChangeText={setDescription}
-                            maxLength={120}
-                        />
+                            <TextInput
+                                style={styles.input}
+                                placeholder="Write new description..."
+                                value={description}
+                                onChangeText={setDescription}
+                                maxLength={120}
+                            />
 
-                        <Button mode="contained" onPress={handleUpdateDeck} style={styles.saveButton}>
-                            Update Deck
-                        </Button>
-                    </View>
-                </LinearGradient>
-            </View >
-        </Modal >
-     </>
+                            <Button mode="contained" onPress={handleUpdateDeck} style={styles.saveButton}>
+                                Update Deck
+                            </Button>
+                        </View>
+                    </LinearGradient>
+                </View >
+            </Modal >
+        </>
     );
 }

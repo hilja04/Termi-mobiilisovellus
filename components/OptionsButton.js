@@ -2,9 +2,10 @@ import { useState } from "react";
 import { Menu, IconButton, Divider } from "react-native-paper";
 import styles from "./styles";
 
-export default function OptionsButton({ actions = [], color = "black",variant = "dark" }) {
+export default function OptionsButton({ actions = [], color = "black", variant = "dark" }) {
     const [visible, setVisible] = useState(false);
-    const variants = {
+
+    const variants = { 
         dark: {
             backgroundColor: "#2e2e2e",
             textColor: "white",
@@ -50,7 +51,7 @@ export default function OptionsButton({ actions = [], color = "black",variant = 
                     style={{
                         paddingVertical: 6,
                         paddingHorizontal: 12,
-                        
+
                     }}
                 />
             ))}
