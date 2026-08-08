@@ -20,7 +20,8 @@ Termi on mobiilisovellus, jonka avulla voi opiskella kielisanastoa ja termejä. 
 ## Keskeiset ominaisuudet
 
 - Korttipakkojen luonti, muokkaus ja poistaminen
-- Korttien luonti ja poistaminen
+- Kaksipuolisten korttien luonti ja poistaminen
+- Korttien kääntäminen 
 - Kolme eri harjoittelutapaa:
   - Flashcard-peli
   - Monivalinta testi
